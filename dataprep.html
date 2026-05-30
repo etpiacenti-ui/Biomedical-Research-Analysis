@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,12 @@
 
 <body>
 
-<h1>Data Preparation & Exploratory Data Analysis</h1>
+<h1>Data Preparation & Exploratory Data Analysis (EDA)</h1>
 
 <p>
-This section describes the datasets used in this project, how they were collected, and the steps used to clean and prepare the data for analysis. The goal of this stage is to build a structured biomedical research dataset that can be used to analyze publication trends, collaboration patterns, and scientific impact over time.
+This section documents how the two datasets used in this project were collected, cleaned, merged, and explored. 
+The goal of this stage is to build a reliable, structured biomedical research dataset suitable for downstream 
+machine learning tasks (clustering, ARM, Naive Bayes, Decision Trees, SVMs, Regression, and Neural Networks).
 </p>
 
 <hr>
@@ -17,141 +20,167 @@ This section describes the datasets used in this project, how they were collecte
 <h2>1. Data Sources</h2>
 
 <p>
-The primary dataset used in this project was collected from the <b>Europe PMC API</b>, a large-scale biomedical literature database that aggregates research articles from PubMed and other life science repositories.
+This project uses <b>two complementary biomedical literature datasets</b>:
 </p>
+
+<h3>1.1 Europe PMC API Dataset (Primary Source)</h3>
 
 <ul>
     <li><b>Source:</b> Europe PMC (European Bioinformatics Institute)</li>
     <li><b>Access Method:</b> REST API</li>
-    <li><b>Query Used:</b> "biomedical"</li>
-    <li><b>Link:</b> https://www.ebi.ac.uk/europepmc/</li>
-    <li><b>Format:</b> JSON (converted to tabular format in R)</li>
+    <li><b>Purpose:</b> Provides large-scale metadata on biomedical publications (authors, journals, indexing dates, open access status, etc.)</li>
+    <li><b>Format:</b> JSON → flattened into CSV</li>
+    <li><b>Raw File:</b> <code>europepmc_clean_data_10000.csv</code></li>
 </ul>
 
-<p>
-In addition to the API data, future versions of this project may incorporate external datasets (such as Kaggle biomedical datasets or NIH datasets) to expand coverage and enable cross-dataset comparisons.
-</p>
-
-<hr>
-
-<h2>2. API Data Collection</h2>
-
-<p>
-Data was collected using the Europe PMC REST API. The API allows direct programmatic access to biomedical publication metadata, including titles, authors, journals, publication years, citation counts, and open access status.
-</p>
-
-<p>
-The following endpoint was used:
-</p>
+<p><b>API Endpoint Used:</b></p>
 
 <pre>
-https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=biomedical&format=json&pageSize=1000
+https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PUB_YEAR:2026&format=json&pageSize=1000
 </pre>
 
 <p>
-The data was retrieved in JSON format and processed in R using the <code>httr</code> and <code>jsonlite</code> packages. The nested JSON structure was flattened into a structured data frame for analysis.
+This query retrieves all biomedical publications indexed in 2026. The JSON response was flattened and cleaned in R.
+</p>
+
+<h3>1.2 Kaggle Biomedical Dataset (Secondary Source)</h3>
+
+<ul>
+    <li><b>Source:</b> Kaggle public dataset</li>
+    <li><b>Purpose:</b> Provides curated metadata such as keywords, major topics, abstract word counts, and country of origin</li>
+    <li><b>Format:</b> CSV</li>
+    <li><b>Raw File:</b> <code>kaggle_clean.csv</code></li>
+</ul>
+
+<p>
+The Kaggle dataset complements the API dataset by providing thematic and semantic variables not available in Europe PMC.
 </p>
 
 <hr>
 
-<h2>3. Raw Data Structure</h2>
+<h2>2. Raw Data Snapshots</h2>
 
 <p>
-The raw dataset contained approximately <b>1000 biomedical research papers</b> with <b>33 variables per paper</b>. Each row represents a single publication, and each column represents metadata associated with that publication.
+Below are small images showing what the raw data looked like before cleaning.
 </p>
 
-<p>Key variables include:</p>
-
-<ul>
-    <li>Title</li>
-    <li>Authors</li>
-    <li>DOI</li>
-    <li>Journal Name</li>
-    <li>Publication Year</li>
-    <li>Citation Count</li>
-    <li>Open Access Status</li>
-    <li>Publication Type</li>
-</ul>
+<div>
+    <img src="images/raw_api.png" width="600">
+    <p><i>Figure A1: Raw API dataset (excerpt).</i></p>
+</div>
 
 <div>
-    <img src="images/raw_data_sample1.png" width="600">
-    <p><i>Figure 1: Example of raw API-derived dataset structure.</i></p>
+    <img src="images/raw_kaggle.png" width="600">
+    <p><i>Figure A2: Raw Kaggle dataset (excerpt).</i></p>
 </div>
 
 <hr>
 
-<h2>4. Data Cleaning Steps</h2>
+<h2>3. Data Cleaning & Standardization</h2>
 
 <p>
-The raw JSON data required several preprocessing steps before it could be used for analysis. Biomedical metadata is often incomplete or inconsistently structured across journals, so cleaning was necessary to ensure data quality.
+Cleaning and EDA were performed iteratively. Each visualization informed the next round of preprocessing.
 </p>
 
-<p><b>Cleaning steps performed:</b></p>
+<h3>3.1 Cleaning Steps for Europe PMC API Data</h3>
 
 <ul>
-    <li>Flattened nested JSON structures into a tabular data frame</li>
-    <li>Converted list-based fields into character strings</li>
-    <li>Removed records with missing titles, DOIs, or publication years</li>
-    <li>Filtered dataset to include only journal articles</li>
-    <li>Standardized publication year format for analysis</li>
+    <li>Converted <code>pubYear</code> → numeric <code>pub_year</code></li>
+    <li>Converted <code>citedByCount</code> → numeric <code>citation_count</code></li>
+    <li>Extracted <code>author_count</code> from <code>authorString</code> using comma counts</li>
+    <li>Standardized <code>isOpenAccess</code> → <code>Open</code> / <code>Closed</code></li>
+    <li>Parsed <code>firstIndexDate</code> and <code>firstPublicationDate</code> into proper date format</li>
+    <li>Computed <code>lag_days = firstIndexDate - firstPublicationDate</code></li>
+    <li>Filtered out negative or impossible lag values</li>
+    <li>Removed missing values in key variables</li>
 </ul>
 
-<p>
-After cleaning, the dataset was reduced from <b>1000 raw records to 623 clean records</b>, ensuring higher reliability for statistical analysis and visualization.
-</p>
+<h3>3.2 Cleaning Steps for Kaggle Data</h3>
+
+<ul>
+    <li>Converted <code>pub_year</code> → numeric</li>
+    <li>Standardized <code>author_count</code> from <code>authors_count</code></li>
+    <li>Tokenized semicolon-separated <code>keywords</code></li>
+    <li>Trimmed whitespace and removed empty tokens</li>
+    <li>Filtered missing <code>major_topic</code> and <code>country</code></li>
+    <li>Ensured <code>abstract_words</code> was numeric</li>
+</ul>
+
+<h3>3.3 Cross-Dataset Harmonization</h3>
+
+<ul>
+    <li>Standardized variable names across datasets (<code>author_count</code>, <code>pub_year</code>, <code>journalTitle</code>)</li>
+    <li>Removed duplicate column names before merging</li>
+    <li>Capped extreme outliers in visualizations (e.g., author_count > 50)</li>
+</ul>
 
 <div>
-    <img src="images/cleaned_data_sample1.png" width="600">
-    <p><i>Figure 2: Example of cleaned and structured dataset.</i></p>
+    <img src="images/clean_api.png" width="600">
+    <p><i>Figure A3: Cleaned API dataset (excerpt).</i></p>
+</div>
+
+<div>
+    <img src="images/clean_kaggle.png" width="600">
+    <p><i>Figure A4: Cleaned Kaggle dataset (excerpt).</i></p>
 </div>
 
 <hr>
 
-<h2>5. Exploratory Data Analysis (EDA)</h2>
+<h2>4. Exploratory Data Analysis (10 Visualizations)</h2>
 
 <p>
-Initial exploratory analysis was conducted to understand the structure and distribution of biomedical research publications in the dataset. This includes examining publication trends, journal frequency, and citation distributions.
+The following visualizations were generated to understand the structure, distribution, and thematic content of the datasets.
 </p>
 
-<p><b>Planned visualizations include:</b></p>
+<h3>Figure 1 — Top 20 Journals (API)</h3>
+<p>Shows which journals published the most biomedical articles in 2026.</p>
+<img src="figures/vis1_top_journals.png" width="600">
 
-<ul>
-    <li>Number of publications per year</li>
-    <li>Top 10 journals by publication count</li>
-    <li>Citation count distribution</li>
-    <li>Open access vs non-open access publications</li>
-    <li>Trend of publications over time</li>
-    <li>Author frequency analysis</li>
-    <li>Publication type distribution</li>
-    <li>Keyword or title frequency analysis</li>
-    <li>Collaboration size distribution</li>
-    <li>Correlation between citations and publication year</li>
-</ul>
+<h3>Figure 2 — Author Count Distribution (API)</h3>
+<p>Shows typical team sizes in biomedical research, capped at 50 authors for clarity.</p>
+<img src="figures/vis2_author_count.png" width="600">
 
-<div>
-    <img src="images/vis1.png" width="600">
-    <img src="images/vis2.png" width="600">
-    <p><i>Figures 3–4: Example exploratory visualizations of biomedical publication trends.</i></p>
-</div>
+<h3>Figure 3 — Indexing Lag (API)</h3>
+<p>Shows how quickly papers are indexed in Europe PMC, with most indexed within a few days.</p>
+<img src="figures/vis3_index_lag.png" width="600">
+
+<h3>Figure 4 — Title Keyword Frequency (API)</h3>
+<p>Shows the most common non-stopword terms appearing in article titles.</p>
+<img src="figures/vis4_title_keywords.png" width="600">
+
+<h3>Figure 5 — Keyword Frequency (Kaggle)</h3>
+<p>Shows the most frequent author-provided keywords in the Kaggle dataset.</p>
+<img src="figures/vis5_keyword_frequency.png" width="600">
+
+<h3>Figure 6 — Major Topic Frequency (Kaggle)</h3>
+<p>Shows the most common high-level research topics assigned to Kaggle papers.</p>
+<img src="figures/vis6_major_topics.png" width="600">
+
+<h3>Figure 7 — Abstract Length Distribution (Kaggle)</h3>
+<p>Shows how long abstracts tend to be, with most under ~300 words.</p>
+<img src="figures/vis7_abstract_length.png" width="600">
+
+<h3>Figure 8 — Country Distribution (Kaggle)</h3>
+<p>Shows which countries appear most frequently as the origin of Kaggle research.</p>
+<img src="figures/vis8_countries.png" width="600">
+
+<h3>Figure 9 — Shared Journals (API vs Kaggle)</h3>
+<p>Shows the top shared journals between datasets, normalized by proportion.</p>
+<img src="figures/vis9_journal_overlap_top10.png" width="600">
+
+<h3>Figure 10 — Author Count Comparison (API vs Kaggle)</h3>
+<p>Shows that API papers have larger author teams, while Kaggle papers have smaller ML/NLP teams.</p>
+<img src="figures/vis10_author_comparison.png" width="600">
 
 <hr>
 
-<h2>6. Key Observations (Preliminary)</h2>
+<h2>5. Summary</h2>
 
 <p>
-Early analysis suggests that biomedical research output is highly concentrated in recent years, reflecting rapid growth in scientific publishing. Journals vary significantly in publication volume, and citation counts show strong skewness, with a small number of papers receiving the majority of citations.
-</p>
-
-<p>
-These patterns indicate that biomedical research behaves as a complex system, where certain topics, journals, and collaborations disproportionately influence scientific impact.
-</p>
-
-<hr>
-
-<h2>7. Summary</h2>
-
-<p>
-This dataset provides a structured foundation for analyzing biomedical research trends using data science techniques. The combination of API-based data collection and systematic cleaning ensures that the dataset is suitable for deeper analysis, including clustering, prediction, and network analysis in later stages of the project.
+This DataPrep/EDA process produced a clean, harmonized, and well-understood biomedical dataset. 
+The combination of Europe PMC API data and Kaggle metadata provides both structural and thematic insight into 
+2026–2027 biomedical research. These cleaned datasets now serve as the foundation for all downstream modeling 
+and machine learning tasks in the project.
 </p>
 
 <hr>
