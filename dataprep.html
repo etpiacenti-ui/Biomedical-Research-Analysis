@@ -10,9 +10,11 @@
 <h1>Data Preparation & Exploratory Data Analysis (EDA)</h1>
 
 <p>
-This section documents how the two datasets used in this project were collected, cleaned, merged, and explored. 
-The goal of this stage is to build a reliable, structured biomedical research dataset suitable for downstream 
-machine learning tasks (clustering, ARM, Naive Bayes, Decision Trees, SVMs, Regression, and Neural Networks).
+This section documents the systematic process by which the two biomedical literature datasets used in this project were collected, integrated, cleaned, standardized, and explored. The workflow spans multiple stages of the data science pipeline, beginning with data acquisition from an external REST API (Europe PMC) and a secondary structured dataset sourced from Kaggle, followed by schema alignment, feature engineering, and data quality assessment. Emphasis is placed on ensuring consistency across heterogeneous data sources, particularly in harmonizing variable definitions, resolving missing values, normalizing textual fields, and addressing outliers that may affect downstream analysis.
+</p>
+
+<p>
+The primary objective of this stage is to construct a robust, high-quality, and analytically coherent biomedical research dataset that is suitable for advanced machine learning applications. This includes unsupervised learning methods such as clustering and association rule mining, as well as supervised learning techniques including Naive Bayes classification, Decision Tree modeling, Support Vector Machines, regression analysis, and neural network architectures. By establishing a clean and well-structured dataset at this stage, the project ensures that subsequent modeling steps are built on a reliable foundation, thereby improving the validity, interpretability, and reproducibility of all analytical results.
 </p>
 
 <hr>
@@ -20,7 +22,7 @@ machine learning tasks (clustering, ARM, Naive Bayes, Decision Trees, SVMs, Regr
 <h2>1. Data Sources</h2>
 
 <p>
-This project uses <b>two complementary biomedical literature datasets</b>:
+This project uses <b>two complementary biomedical literature datasets</b>. All raw data sources and links are provided in Section 6 at the bottom of this page.
 </p>
 
 <h3>1.1 Europe PMC API Dataset (Primary Source)</h3>
@@ -30,10 +32,9 @@ This project uses <b>two complementary biomedical literature datasets</b>:
     <li><b>Access Method:</b> REST API</li>
     <li><b>Purpose:</b> Provides large-scale metadata on biomedical publications (authors, journals, indexing dates, open access status, etc.)</li>
     <li><b>Format:</b> JSON → flattened into CSV</li>
-    <li><b>Raw File:</b> <code>europepmc_clean_data_10000.csv</code></li>
 </ul>
 
-<p><b>API Endpoint Used:</b></p>
+<p><b>API Endpoint Used:</b></p> <a href="https://europepmc.org/RestfulWebService" target="_blank">
 
 <pre>
 https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PUB_YEAR:2026&format=json&pageSize=1000
@@ -49,7 +50,6 @@ This query retrieves all biomedical publications indexed in 2026. The JSON respo
     <li><b>Source:</b> Kaggle public dataset</li>
     <li><b>Purpose:</b> Provides curated metadata such as keywords, major topics, abstract word counts, and country of origin</li>
     <li><b>Format:</b> CSV</li>
-    <li><b>Raw File:</b> <code>kaggle_clean.csv</code></li>
 </ul>
 
 <p>
@@ -177,12 +177,9 @@ The following visualizations were generated to understand the structure, distrib
 <h2>5. Summary</h2>
 
 <p>
-This DataPrep/EDA process produced a clean, harmonized, and well-understood biomedical dataset. 
-The combination of Europe PMC API data and Kaggle metadata provides both structural and thematic insight into 
-2026–2027 biomedical research. These cleaned datasets now serve as the foundation for all downstream modeling 
-and machine learning tasks in the project.
+The Data Preparation process resulted in cleaned, standardized, and analytically consistent biomedical datasets. These datasets provide a multidimensional representation of biomedical research activity spanning publication trends, topical distributions, and collaborative structures for the 2026–2027 period. The resulting processed dataset serves as a validated and reproducible foundation for all subsequent machine learning workflows in this project, including both unsupervised learning (clustering and association rule mining) and supervised learning methods (classification, regression, and neural network modeling). This ensures that downstream analyses are conducted on a reliable, consistent, and methodologically sound data framework.
 </p>
-
+    
 <hr>
 
 <nav>
