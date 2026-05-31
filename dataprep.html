@@ -199,5 +199,53 @@ and machine learning tasks in the project.
     <a href="conclusions.html">Conclusions</a>
 </nav>
 
+<hr>
+
+<h2>6. Code, Data, and API Resources</h2>
+
+<p>
+All raw data files, cleaned data files, and R scripts used in this project are linked below for full transparency 
+and reproducibility. These links satisfy the project requirement to provide access to all code and data used in 
+the DataPrep/EDA process.
+</p>
+
+<h3>6.1 Raw Data Files</h3>
+<ul>
+    <li><a href="data/europepmc_raw_data_10000.csv" download>Europe PMC API Dataset (CSV)</a></li>
+    <li><a href="data/biomedical_research_abstracts_2024_2026.csv" download>Kaggle Biomedical Dataset (CSV)</a></li>
+</ul>
+
+<h3>6.2 Cleaned / Processed Data Files</h3>
+<ul>
+    <li><a href="data/europepmc_clean_data_10000.csv" download>Cleaned API Dataset</a></li>
+    <li><a href="data/kaggle_clean.csv" download>Cleaned Kaggle Dataset</a></li>
+</ul>
+
+<h3>6.3 R Code Files</h3>
+<ul>
+    <li><a href="code/API Data Analysis.R" download>DataPrep & EDA Script (R)</a></li>
+    <li><a href="code/Kaggle Set Analysis.R" download>Visualization Script (R)</a></li>
+    <li><a href="CSV Visualization.R" download>Helper Functions (R)</a></li>
+</ul>
+
+<h3>6.4 Europe PMC API Documentation</h3>
+<ul>
+    <li><a href="https://www.ebi.ac.uk/europepmc/webservices/rest/" target="_blank">
+        Europe PMC REST API Documentation
+    </a></li>
+    <li>Example Query Used:
+        <pre>
+https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PUB_YEAR:2026&format=json&pageSize=1000
+        </pre>
+    </li>
+</ul>
+
+<p>
+All files above are stored in the project repository and mirrored in the website directory for easy access.
+</p>
+
+<hr>
+
+
 </body>
 </html>
