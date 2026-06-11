@@ -35,8 +35,10 @@ with the first principal component capturing the greatest variance and each subs
 the maximum remaining variance while remaining orthogonal to the previous components (Fig. 1).
 </p>
 
-<img src="images/pca_example.png" alt="PCA Example 1" width="400">
-    
+<!-- FIGURE 1 -->
+<img src="images/pca_example.png" alt="PCA Example" width="400">
+<p><em>Figure 1. Conceptual illustration of PCA transforming high-dimensional data into a lower-dimensional space while preserving the directions of greatest variance. Adapted from: <a href="https://medium.com/@raghavan99o/principal-component-analysis-pca-explained-and-implemented-eeab7cb73b72" target="_blank">Raghavan (2023)</a>.</em></p>
+
 <p>
 PCA relies on <strong>eigenvalues</strong> and <strong>eigenvectors</strong> of the covariance matrix. 
 An eigenvector represents a direction in feature space along which the data exhibits variation, while
@@ -52,14 +54,25 @@ efficiently compute PCA. SVD factorizes the data matrix into orthogonal componen
 preferred method for large datasets.
 </p>
 
-<img src="images/pca_eigenvector.png" alt="PCA Example 2" width="400">
+<!-- FIGURE 2 -->
+<img src="images/pca_eigenvector.png" alt="PCA Eigenvector Illustration" width="400">
+<p><em>Figure 2. Visualization of eigenvectors and eigenvalues, which define the principal component directions and the amount of variance captured along each direction. Adapted from: <a href="https://medium.com/@raghavan99o/principal-component-analysis-pca-explained-and-implemented-eeab7cb73b72" target="_blank">Raghavan (2023)</a>.</em></p>
 
 <hr>
 
 <h2>Data Preparation</h2>
 <p>
-PCA requires <strong>numeric</strong> variables. From the biomedical subset of the Semantic Scholar dataset, 
-we selected the following quantitative features:
+PCA requires <strong>numeric</strong> variables. The original Semantic Scholar dataset contains nested JSON fields, 
+text fields, and categorical metadata. Below is a snippet of the <strong>raw data</strong> before cleaning:
+</p>
+
+<!-- RAW DATA SNIPPET IMAGE -->
+<img src="images/ssc_raw.png" alt="Raw Data Sample" width="600">
+<p><em>Figure 3. Raw Semantic Scholar data showing nested JSON fields, text metadata, and non-numeric structures prior to cleaning.</em></p>
+
+<p>
+After filtering to biomedical fields and engineering numeric features, the dataset was cleaned and reduced to the 
+following variables:
 </p>
 
 <ul>
@@ -72,17 +85,23 @@ we selected the following quantitative features:
 </ul>
 
 <p>
-These variables were standardized (mean = 0, variance = 1) before PCA to ensure that features on larger scales 
-(e.g., citation counts) did not dominate the analysis.
+Below is a snippet of the <strong>cleaned dataset</strong> used for PCA:
 </p>
 
-<img src="images/pca_data_sample.png" alt="PCA Data Sample" width="600">
+<!-- CLEAN DATA SNIPPET IMAGE -->
+<img src="images/ssc_clean.png" alt="Clean Data Sample" width="600">
+<p><em>Figure 4. Cleaned biomedical dataset containing only numeric features suitable for PCA.</em></p>
 
 <p>
 Dataset link: 
 <a href="biomed_clean.csv">biomed_clean.csv</a>
 </p>
 
+<p>
+Code used to clean the Semantic Scholar API dataset:
+<a href="code/api_cleaning.R">API Cleaning Code (R)</a>
+</p>
+    
 <hr>
 
 <h2>Code</h2>
@@ -108,23 +127,11 @@ year, number of authors, and title length.
 
 <h3>Scree Plot</h3>
 <img src="images/pca_scree_plot.png" alt="Scree Plot" width="600">
-
-<p>
-The scree plot displays a clear “elbow” after the second component, indicating that 
-<strong>PC1 and PC2 capture the most meaningful structure</strong> in the data. 
-Subsequent components contribute relatively little additional variance.
-</p>
+<p><em>Figure 5. Scree plot showing the variance explained by each principal component. A clear elbow appears after PC2, indicating that the first two components capture the most meaningful structure in the dataset.</em></p>
 
 <h3>PC1 vs PC2 Visualization</h3>
 <img src="images/pca_scatter_pc1_pc2.png" alt="PC1 vs PC2" width="600">
-
-<p>
-The PC1 vs PC2 scatterplot shows how individual papers are distributed along the two strongest 
-dimensions of variation. Papers spread diagonally across the plot, suggesting that citation-related 
-features and publication-related features are partially correlated but still capture distinct patterns. 
-Most papers cluster near the origin, indicating similar citation and authorship characteristics, while 
-a long tail along PC1 reflects a small number of highly cited or highly referenced papers.
-</p>
+<p><em>Figure 6. PC1 vs PC2 scatterplot illustrating how biomedical papers distribute along the two strongest dimensions of variation. PC1 reflects citation-related impact, while PC2 captures publication characteristics such as authorship and year.</em></p>
 
 <hr>
 
