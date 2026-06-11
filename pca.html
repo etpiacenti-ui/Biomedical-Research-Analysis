@@ -26,21 +26,24 @@
 
 <h1>Principal Component Analysis (PCA)</h1>
 
-<!-- ========================= -->
-<!-- 1. OVERVIEW SECTION -->
-<!-- ========================= -->
 <h2>Overview</h2>
 <p>
 Principal Component Analysis (PCA) is a dimensionality reduction technique that transforms 
 high-dimensional data into a smaller set of uncorrelated variables called principal components. 
-These components capture the directions of maximum variance in the data.
+These principal components are ordered according to the amount of variance they explain within the dataset, 
+with the first principal component capturing the greatest variance and each subsequent component capturing 
+the maximum remaining variance while remaining orthogonal to the previous components (Fig. 1).
 </p>
 
+<img src="images/pca_example.png" alt="PCA Example 1" width="400">
+    
 <p>
 PCA relies on <strong>eigenvalues</strong> and <strong>eigenvectors</strong> of the covariance matrix. 
-Eigenvectors define the directions of maximum variance, while eigenvalues quantify how much variance 
-each component explains. PCA is especially useful for simplifying analysis, reducing noise, 
-and visualizing high-dimensional biomedical data.
+An eigenvector represents a direction in feature space along which the data exhibits variation, while
+its corresponding eigenvalue quantifies the magnitude of variance explained in that direction (Fig. 2). PCA identifies 
+the eigenvectors associated with the largest eigenvalues and uses them to construct a new coordinate system for
+the data. The first principal component corresponds to the eigenvector with the largest eigenvalue, the second 
+principal component corresponds to the eigenvector with the second-largest eigenvalue, and so forth.
 </p>
 
 <p>
@@ -49,75 +52,90 @@ efficiently compute PCA. SVD factorizes the data matrix into orthogonal componen
 preferred method for large datasets.
 </p>
 
-<!-- Add two images -->
-<img src="images/pca_example1.png" alt="PCA Example 1" width="400">
-<img src="images/pca_example2.png" alt="PCA Example 2" width="400">
+<img src="images/pca_eigenvector.png" alt="PCA Example 2" width="400">
 
 <hr>
 
-<!-- ========================= -->
-<!-- 2. DATA PREP SECTION -->
-<!-- ========================= -->
 <h2>Data Preparation</h2>
 <p>
-PCA requires <strong>numeric</strong> data. Categorical variables must be encoded or removed. 
-Below is a sample of the dataset used for PCA, along with a link to the full dataset.
+PCA requires <strong>numeric</strong> variables. From the biomedical subset of the Semantic Scholar dataset, 
+we selected the following quantitative features:
+</p>
+
+<ul>
+    <li><strong>year</strong> – publication year</li>
+    <li><strong>n_authors</strong> – number of authors</li>
+    <li><strong>title_length</strong> – number of characters in the title</li>
+    <li><strong>referencecount</strong> – number of references cited</li>
+    <li><strong>citationcount</strong> – total citations received</li>
+    <li><strong>influentialcitationcount</strong> – influential citations</li>
+</ul>
+
+<p>
+These variables were standardized (mean = 0, variance = 1) before PCA to ensure that features on larger scales 
+(e.g., citation counts) did not dominate the analysis.
 </p>
 
 <img src="images/pca_data_sample.png" alt="PCA Data Sample" width="600">
 
 <p>
 Dataset link: 
-<a href="europepmc_clean_data_10000.csv">europepmc_clean_data_10000.csv</a>
+<a href="biomed_clean.csv">biomed_clean.csv</a>
 </p>
 
 <hr>
 
-<!-- ========================= -->
-<!-- 3. CODE SECTION -->
-<!-- ========================= -->
 <h2>Code</h2>
 <p>
-Below is the code used to perform PCA using R/Python. Full scripts are available in the 
+Below is the code used to perform PCA using R. Full scripts are available in the 
 <code>code/</code> folder.
 </p>
 
 <p>
-<a href="code/pca_analysis.R">PCA Code (R)</a><br>
-<a href="code/pca_analysis.py">PCA Code (Python)</a>
+<a href="code/pca_analysis.R">PCA Code (R)</a>
 </p>
 
 <hr>
 
-<!-- ========================= -->
-<!-- 4. RESULTS SECTION -->
-<!-- ========================= -->
 <h2>Results</h2>
 <p>
-This section presents the PCA results, including variance explained, principal component loadings, 
-and visualizations such as scree plots and PC1 vs PC2 scatterplots.
+The PCA results provide insight into the major sources of variation in the biomedical publication dataset.
+The scree plot below shows that the first two principal components explain the majority of the variance. 
+PC1 captures differences primarily related to <strong>citation behavior</strong> (citation count, influential citations, 
+and reference count), while PC2 captures variation related to <strong>publication characteristics</strong> such as 
+year, number of authors, and title length.
 </p>
 
 <h3>Scree Plot</h3>
 <img src="images/pca_scree_plot.png" alt="Scree Plot" width="600">
 
+<p>
+The scree plot displays a clear “elbow” after the second component, indicating that 
+<strong>PC1 and PC2 capture the most meaningful structure</strong> in the data. 
+Subsequent components contribute relatively little additional variance.
+</p>
+
 <h3>PC1 vs PC2 Visualization</h3>
 <img src="images/pca_scatter_pc1_pc2.png" alt="PC1 vs PC2" width="600">
 
 <p>
-Interpretation of results goes here: discuss which components explain the most variance, 
-how variables load onto components, and what patterns emerge in the biomedical data.
+The PC1 vs PC2 scatterplot shows how individual papers are distributed along the two strongest 
+dimensions of variation. Papers spread diagonally across the plot, suggesting that citation-related 
+features and publication-related features are partially correlated but still capture distinct patterns. 
+Most papers cluster near the origin, indicating similar citation and authorship characteristics, while 
+a long tail along PC1 reflects a small number of highly cited or highly referenced papers.
 </p>
 
 <hr>
 
-<!-- ========================= -->
-<!-- 5. CONCLUSIONS SECTION -->
-<!-- ========================= -->
 <h2>Conclusions</h2>
 <p>
-Summarize what PCA revealed about your topic. Discuss how dimensionality reduction helped 
-simplify the data, highlight important patterns, or improve interpretability for downstream analysis.
+PCA revealed that the biomedical publication dataset is driven primarily by two major factors: 
+<strong>scholarly impact</strong> (citations and references) and <strong>publication characteristics</strong> 
+(authorship and year). Dimensionality reduction allowed us to visualize these patterns clearly and 
+provided a compact representation of the dataset for downstream clustering. By reducing six correlated 
+variables into two principal components, PCA simplified the structure of the data while preserving 
+the most important sources of variation.
 </p>
 
 </body>
