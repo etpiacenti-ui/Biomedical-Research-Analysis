@@ -112,8 +112,7 @@ Code used to clean the Semantic Scholar API dataset:
 
 <h2>Code</h2>
 <p>
-Below is the code used to perform PCA using R. Full scripts are available in the 
-<code>code/</code> folder.
+Below is the code used to perform PCA using R. 
 </p>
 
 <p>
@@ -143,13 +142,14 @@ year, number of authors, and title length.
 
 <h2>Conclusions</h2>
 <p>
-PCA revealed that the biomedical publication dataset is driven primarily by two major factors: 
-<strong>scholarly impact</strong> (citations and references) and <strong>publication characteristics</strong> 
-(authorship and year). Dimensionality reduction allowed us to visualize these patterns clearly and 
-provided a compact representation of the dataset for downstream clustering. By reducing six correlated 
-variables into two principal components, PCA simplified the structure of the data while preserving 
-the most important sources of variation.
-</p>
+PCA revealed that the biomedical publication dataset is driven primarily by two major factors.
+The first principal component (PC1) captures differences in scholarly impact, driven by citation count, influential citations, and reference count. 
+Papers with high impact load strongly and positively on this axis, while the majority of low‑citation papers cluster near the origin. 
+The second principal component (PC2) reflects publication characteristics, including authorship patterns, title length, and publication year. 
+This axis separates older, smaller‑team publications from more recent papers with larger author groups and longer titles.
+The scree plot demonstrates a clear elbow after PC2, showing that the first two components capture the most meaningful variance while additional components contribute only marginally.
+The PC1–PC2 scatterplot then illustrates how impact‑related and publication‑related features interact, that reveal a dense central cluster of typical papers and a long tail of highly cited outliers.
+<p>
 
 </body>
 </html>
