@@ -61,9 +61,6 @@ text-derived features.
     
 <hr>
 
-<!-- ========================= -->
-<!-- 2. DATA PREP SECTION -->
-<!-- ========================= -->
 <h2>Data Preparation</h2>
 <p>
 Clustering requires <strong>numeric, unlabeled</strong> data. All non-numeric variables (titles, authors, journal names) 
@@ -80,15 +77,20 @@ Below is a sample of the dataset used for clustering:
     <figcaption><em>Sample of the numeric dataset used for clustering.</em></figcaption>
 </figure>
 
+<p> 
+<p>Dataset link:</p>
+<ul>
+    <li>
+        <a href="https://drive.google.com/uc?export=download&id=1dIUjflIiGkDZwZZbzLHdgyzv-Xu-P-6O">
+            biomed_clean.csv (Cleaned Semantic Scholar Dataset)
+        </a>
+    </li>
+</ul>
+
 <p>
-Dataset link: <a href="europepmc_clean_data_10000.csv">europepmc_clean_data_10000.csv</a>
-</p>
 
 <hr>
 
-<!-- ========================= -->
-<!-- 3. CODE SECTION -->
-<!-- ========================= -->
 <h2>Code</h2>
 <p>
 Both k-means and hierarchical clustering were implemented in R. K-means was run for multiple values of <em>k</em>, 
@@ -156,10 +158,7 @@ number of clusters for this dataset.
 </p>
 
 <hr>
-
-<!-- ========================= -->
-<!-- 5. CONCLUSIONS SECTION -->
-<!-- ========================= -->
+    
 <h2>Conclusions</h2>
 <p>
 Clustering revealed meaningful structure in the biomedical research dataset. 
