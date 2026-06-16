@@ -64,7 +64,7 @@
         This ensures that the model remains robust and can handle previously unseen terms. Alongside the 
         multinomial version, there is also Bernoulli Naïve Bayes, which is designed for binary 
         presence/absence features rather than counts. Bernoulli NB is useful when the data naturally 
-        reflects whether a feature occurs at least once—such as keyword flags or one‑hot encoded 
+        reflects whether a feature occurs at least once, such as keyword flags or one‑hot encoded 
         variables—making it a flexible alternative depending on the structure of the dataset.
     </p>
 
@@ -100,7 +100,7 @@
     (class priors and conditional likelihoods), while the 
     <strong>Testing Set (20%)</strong> provides an unbiased evaluation of how well the 
     model generalizes to unseen data. The two sets must be completely disjoint to 
-    prevent information leakage—if the model sees the same papers during both training 
+    prevent information leakage. If the model sees the same papers during both training 
     and testing, the accuracy would be artificially inflated.
 </p>
 
