@@ -11,7 +11,7 @@
     <a href="introduction.html">Introduction</a> |
     <a href="dataprep.html">DataPrep/EDA</a> |
     <a href="clustering.html">Clustering</a> |
-    <a href="pca.html">PCA</a>
+    <a href="pca.html">PCA</a> |
     <a href="naivebayes.html">Naive Bayes</a> |
     <a href="decisiontrees.html">Decision Trees</a> |
     <a href="arm.html">ARM</a> |
@@ -25,7 +25,291 @@
 
 <h1>Decision Trees</h1>
 
-<p>This section will be completed during Module 3.</p>
+<h2>Overview</h2>
+
+<p>
+Decision Trees (DTs) are supervised learning models that operate by recursively partitioning the feature space into increasingly homogeneous subsets. 
+At each stage of the tree-building process, the algorithm evaluates all possible splits across all available features and selects the split that maximally improves the purity of the resulting partitions. 
+This recursive partitioning continues until a stopping criterion is met, such as reaching a minimum node size, achieving complete purity, or hitting a predefined maximum depth. 
+The final structure resembles a hierarchical, tree-like model in which internal nodes represent decision rules, branches represent outcomes of those rules, and terminal nodes (leaves) represent predicted class labels or numerical values.
+</p>
+
+<p>
+Decision Trees are widely used in both classification and regression tasks because they require no assumptions about linearity, normality, or feature interactions. 
+They naturally capture nonlinear relationships and complex interactions between variables, and they produce models that are highly interpretable. 
+A prediction can be explained simply by tracing the path from the root node to a leaf node, making Decision Trees especially valuable in domains where transparency and justification of decisions are essential, such as healthcare diagnostics, credit scoring, and policy analysis.
+</p>
+
+<!-- IMAGE 1 -->
+<img src="images/dt_example1.png" alt="Decision Tree Diagram" style="width:45%; margin:10px;">
+
+<!-- IMAGE 2 -->
+<img src="images/dt_example2.png" alt="Decision Tree Split Example" style="width:45%; margin:10px;">
+
+<p>
+The central challenge in constructing a Decision Tree is determining which split at each node yields the greatest improvement in predictive structure. 
+To quantify the quality of a split, Decision Trees rely on impurity measures—mathematical functions that describe how mixed or uncertain the class distribution is within a node. 
+Two of the most widely used impurity metrics are <strong>GINI impurity</strong> and <strong>Entropy</strong>. 
+Both metrics reach their minimum value (0) when a node is perfectly pure (i.e., contains only one class), and both increase as the class distribution becomes more heterogeneous.
+</p>
+
+<h3>GINI Impurity</h3>
+<p>
+GINI impurity, used primarily in the CART (Classification and Regression Trees) algorithm, measures the expected probability of misclassification if a randomly selected observation from the node were labeled according to the node’s class proportions. 
+It is defined as:
+</p>
+
+<p style="margin-left:20px;">
+GINI = 1 − Σ p<sub>i</sub><sup>2</sup>
+</p>
+
+<p>
+where p<sub>i</sub> represents the proportion of class i within the node. 
+GINI is computationally efficient and tends to favor splits that isolate the most frequent class.
+</p>
+
+<h3>Entropy</h3>
+<p>
+Entropy originates from information theory and quantifies the level of uncertainty or disorder within a node. 
+A node with a uniform class distribution has high entropy, while a node dominated by a single class has low entropy. 
+Entropy is defined as:
+</p>
+
+<p style="margin-left:20px;">
+Entropy = − Σ p<sub>i</sub> log<sub>2</sub>(p<sub>i</sub>)
+</p>
+
+<p>
+Entropy is used in algorithms such as ID3 and C4.5. 
+Although slightly more computationally intensive than GINI, it provides a theoretically elegant measure of information content.
+</p>
+
+<h3>Information Gain</h3>
+<p>
+Information Gain (IG) is the criterion used to evaluate the effectiveness of a split. 
+It measures the reduction in impurity achieved by partitioning a node into child nodes. 
+A split with high Information Gain produces child nodes that are significantly purer than the parent node. 
+Formally:
+</p>
+
+<p style="margin-left:20px;">
+Information Gain = Impurity(parent) − Weighted Impurity(children)
+</p>
+
+<p>
+The weighted impurity accounts for the relative sizes of the child nodes, ensuring that large impure nodes are penalized more heavily than small ones.
+</p>
+
+<h3>Small Example: Using Entropy + Information Gain</h3>
+
+<p>
+Consider a node containing 10 observations: 6 labeled “Yes” and 4 labeled “No.” 
+The entropy of this parent node is:
+</p>
+
+<p style="margin-left:20px;">
+Entropy(parent) = −(6/10)log₂(6/10) − (4/10)log₂(4/10) ≈ 0.97
+</p>
+
+<p>
+Suppose a candidate split produces two child nodes:
+</p>
+
+<ul>
+    <li>Left child: 4 Yes, 1 No → Entropy ≈ 0.72</li>
+    <li>Right child: 2 Yes, 3 No → Entropy ≈ 0.97</li>
+</ul>
+
+<p>
+The weighted entropy of the children is:
+</p>
+
+<p style="margin-left:20px;">
+(5/10)(0.72) + (5/10)(0.97) = 0.845
+</p>
+
+<p>
+Thus, the Information Gain is:
+</p>
+
+<p style="margin-left:20px;">
+IG = 0.97 − 0.845 = 0.125
+</p>
+
+<p>
+This value represents the reduction in uncertainty achieved by the split. 
+The algorithm compares this IG value with the IG values of all other possible splits and selects the split that maximizes impurity reduction.
+</p>
+
+<h3>Why Infinite Trees Are Possible</h3>
+<p>
+It is theoretically possible to construct infinitely many Decision Trees from the same dataset because the structure of a tree is highly sensitive to the choices made during the splitting process. 
+Different algorithms employ different impurity measures, tie-breaking rules, and stopping criteria. 
+Even within a single algorithmic framework, the following factors contribute to the vast number of possible trees:
+</p>
+
+<ul>
+    <li>Each feature may be split at numerous possible thresholds, especially for continuous variables.</li>
+    <li>Different sequences of splits can lead to entirely different hierarchical structures.</li>
+    <li>Randomized methods (e.g., Random Forests) introduce stochasticity in feature selection and sample selection.</li>
+    <li>Pruning strategies, such as cost-complexity pruning or reduced-error pruning, alter the final shape of the tree.</li>
+</ul>
+
+<p>
+Because of these factors, even a modest dataset can yield an enormous—effectively infinite—space of valid tree structures. 
+This flexibility is both a strength and a weakness: while it allows Decision Trees to model complex patterns, it also makes them prone to overfitting unless regularization techniques are applied.
+</p>
+
+<!-- ========================= -->
+<!--        DATA PREP         -->
+<!-- ========================= -->
+
+<h2>Data Preparation</h2>
+
+<p>
+Decision Trees are supervised learning methods, which means they require <strong>labeled data</strong>. 
+Before training the model, the dataset must be split into two disjoint subsets:
+</p>
+
+<ul>
+    <li><strong>Training Set</strong> – used to build the model</li>
+    <li><strong>Testing Set</strong> – used to evaluate accuracy</li>
+</ul>
+
+<p>
+Only labeled data can be used for supervised learning because the model must learn the relationship between features and known outcomes. 
+The Training and Testing sets must be disjoint to ensure that the model is evaluated on data it has never seen before.
+</p>
+
+<h3>Dataset Sample</h3>
+
+<p>Below is a small sample of the dataset used for Decision Trees:</p>
+
+<!-- DATA SAMPLE IMAGE -->
+<img src="images/dt_dataset_sample.png" alt="Dataset Sample" style="width:60%; margin:10px;">
+
+<p>
+Dataset link:  
+<a href="YOUR_DATASET_LINK_HERE" target="_blank">Click here to view dataset sample</a>
+</p>
+
+<h3>Training and Testing Sets</h3>
+
+<p>
+The dataset was split into training and testing subsets using an 80/20 split (or your chosen ratio). 
+This ensures the model has enough data to learn patterns while still being evaluated fairly.
+</p>
+
+<!-- TRAINING SET IMAGE -->
+<img src="images/dt_train_sample.png" alt="Training Set Sample" style="width:45%; margin:10px;">
+
+<!-- TESTING SET IMAGE -->
+<img src="images/dt_test_sample.png" alt="Testing Set Sample" style="width:45%; margin:10px;">
+
+<p>
+The two sets are completely disjoint, meaning no row appears in both. This prevents data leakage and ensures an honest evaluation of model performance.
+</p>
+
+<hr>
+
+<!-- ========================= -->
+<!--          CODE            -->
+<!-- ========================= -->
+
+<h2>Code</h2>
+
+<p>
+The Decision Tree model was implemented using 
+<strong>Python (sklearn)</strong> / <strong>R</strong> (choose one depending on your project).  
+Python requires numeric data only, while R can handle mixed data types.
+</p>
+
+<p>
+Code link:  
+<a href="YOUR_CODE_LINK_HERE" target="_blank">View Decision Tree Code</a>
+</p>
+
+<!-- OPTIONAL: code snippet placeholder -->
+<pre>
+# Example placeholder (replace with your actual code or link)
+from sklearn.tree import DecisionTreeClassifier
+model = DecisionTreeClassifier(criterion="entropy", max_depth=4)
+model.fit(X_train, y_train)
+preds = model.predict(X_test)
+</pre>
+
+<hr>
+
+<!-- ========================= -->
+<!--         RESULTS          -->
+<!-- ========================= -->
+
+<h2>Results</h2>
+
+<p>
+After training the Decision Tree model, predictions were generated for the Testing Set. 
+The performance was evaluated using a confusion matrix and accuracy score.
+</p>
+
+<h3>Confusion Matrix</h3>
+
+<!-- CONFUSION MATRIX IMAGE -->
+<img src="images/dt_confusion_matrix.png" alt="Confusion Matrix" style="width:50%; margin:10px;">
+
+<h3>Accuracy</h3>
+
+<p>
+Model Accuracy: <strong>XX.X%</strong>  
+(Replace with your computed accuracy)
+</p>
+
+<h3>Decision Trees Generated</h3>
+
+<p>
+Below are three different Decision Trees created by adjusting depth, splitting criteria, or pruning parameters.
+</p>
+
+<!-- TREE 1 -->
+<img src="images/dt_tree1.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
+
+<!-- TREE 2 -->
+<img src="images/dt_tree2.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
+
+<!-- TREE 3 -->
+<img src="images/dt_tree3.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
+
+<p>
+Each tree differs based on hyperparameters such as maximum depth, minimum samples per split, or the impurity measure used (GINI vs. Entropy). 
+These differences affect how the model generalizes and what patterns it prioritizes.
+</p>
+
+<hr>
+
+<!-- ========================= -->
+<!--       CONCLUSIONS        -->
+<!-- ========================= -->
+
+<h2>Conclusions</h2>
+
+<p>
+The Decision Tree model revealed several meaningful patterns in the dataset. 
+Based on the splits chosen by the algorithm, the most important features influencing predictions were:
+</p>
+
+<ul>
+    <li><strong>[Insert Feature 1]</strong></li>
+    <li><strong>[Insert Feature 2]</strong></li>
+    <li><strong>[Insert Feature 3]</strong></li>
+</ul>
+
+<p>
+The model achieved an accuracy of <strong>XX.X%</strong>, indicating that it can reasonably predict outcomes related to the project topic. 
+The multiple trees generated also demonstrated how different hyperparameters influence model complexity and interpretability.
+</p>
+
+<p>
+Overall, Decision Trees provided clear, interpretable insights into the structure of the data and helped identify the most influential predictors for the topic being studied.
+</p>
 
 </body>
 </html>
