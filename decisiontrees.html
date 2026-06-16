@@ -30,9 +30,29 @@
 <p>
 Decision Trees (DTs) are supervised learning models that operate by recursively partitioning the feature space into increasingly homogeneous subsets. 
 At each stage of the tree-building process, the algorithm evaluates all possible splits across all available features and selects the split that maximally improves the purity of the resulting partitions. 
-This recursive partitioning continues until a stopping criterion is met, such as reaching a minimum node size, achieving complete purity, or hitting a predefined maximum depth. 
+This recursive partitioning continues until a stopping criterion is met, such as reaching a minimum node size (leaf node), achieving complete purity, or hitting a predefined maximum depth, as shown in Fig. 1. 
 The final structure resembles a hierarchical, tree-like model in which internal nodes represent decision rules, branches represent outcomes of those rules, and terminal nodes (leaves) represent predicted class labels or numerical values.
+An example of this can be seen in Fig. 2, where the dataset is partitioned along different candidate attributes—such as gender, participation in other sports, or academic grade level—and each potential split produces child nodes with
+distinct class distributions. These alternative partitions illustrate how the algorithm evaluates every feasible feature-based division, quantifies the resulting change in class purity, and ultimately selects the split that yields the
+greatest reduction in impurity. In this example, each candidate split produces subgroups with different proportions of students who play tennis, demonstrating how Decision Trees systematically compare these competing partitions to 
+determine the most informative branching structure.
 </p>
+
+<figure>
+    <img src="images/node_structure.png" alt="Naïve Bayes Flowchart" width="400">
+    <figcaption>
+        Figure 1: Flowchart of decision tree classification.  
+        <a href="https://www.ejable.com/tech-corner/ai-machine-learning-and-deep-learning/introduction-to-decision-trees-in-supervised-learning/" target="_blank">Source</a>
+    </figcaption>
+</figure>
+
+<figure>
+    <img src="images/decision_tree_example.png" alt="Naïve Bayes Flowchart" width="400">
+    <figcaption>
+        Figure 2: Decision tree example of classifying information.  
+        <a href="https://www.ejable.com/tech-corner/ai-machine-learning-and-deep-learning/introduction-to-decision-trees-in-supervised-learning/" target="_blank">Source</a>
+    </figcaption>
+</figure>
 
 <p>
 Decision Trees are widely used in both classification and regression tasks because they require no assumptions about linearity, normality, or feature interactions. 
