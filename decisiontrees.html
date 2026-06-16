@@ -241,66 +241,69 @@ description of how code works!!!!
 
 <hr>
 
-<!-- ========================= -->
-<!--         RESULTS          -->
-<!-- ========================= -->
-
 <h2>Results</h2>
 
 <p>
-After training the Decision Tree model, predictions were generated for the Testing Set. 
-The performance was evaluated using a confusion matrix and accuracy score.
+After training the Decision Tree model on the 80% Training Set, predictions were generated for the Testing Set. 
+Model performance was evaluated using a confusion matrix, overall accuracy, and class‑specific metrics such as sensitivity and specificity. 
+Removing <code>citationcount</code> from the predictor set prevented label leakage and resulted in a more realistic, generalizable model.
 </p>
 
 <h3>Confusion Matrix</h3>
 
 <img src="images/dt_confusion_matrix.png" alt="Confusion Matrix" style="width:50%; margin:10px;">
 
-<h3>Accuracy</h3>
-    <figure>
-        <img src="images/accuracy_xxx.png" alt="Accuracy Plot" width="450">
-        <figcaption>
-            Figure 8: Visualization of model accuracy on the Testing Set.  
-        </figcaption>
-    </figure>
+<p>
+The confusion matrix shows that the model correctly classified a large majority of both high‑cited and low‑cited papers. 
+However, misclassifications occurred in both directions, reflecting the complexity and overlap in bibliometric metadata.
+</p>
 
-    <p>
-        <strong>Accuracy:</strong> 93.11%  
-        <br>
-        <strong>Sensitivity (High-Cited Detection):</strong> 90.70%  
-        <br>
-        <strong>Specificity (Low-Cited Detection):</strong> 97.03%  
-        <br>
-        <strong>Positive Predictive Value:</strong> 98.02%  
-        <br>
-        <strong>Kappa:</strong> 0.8574 (excellent agreement)  
-    </p>
+<h3>Accuracy</h3>
+
+<figure>
+    <img src="images/accuracy_dt.png" alt="Accuracy Plot" width="450">
+    <figcaption>
+        Figure 8: Visualization of Decision Tree accuracy compared to the No‑Information Rate.
+    </figcaption>
+</figure>
+
+<p>
+<strong>Accuracy:</strong> 82.91%  
+<br>
+<strong>Sensitivity (High‑Cited Detection):</strong> 87.83%  
+<br>
+<strong>Specificity (Low‑Cited Detection):</strong> 74.93%  
+<br>
+<strong>Positive Predictive Value:</strong> 85.03%  
+<br>
+<strong>Negative Predictive Value:</strong> 79.16%  
+<br>
+<strong>Kappa:</strong> 0.6341 (substantial agreement)  
+<br>
+<strong>Balanced Accuracy:</strong> 81.38%  
+</p>
+
+<p>
+The model significantly outperformed the No‑Information Rate (61.85%), indicating that the Decision Tree learned meaningful structure from the metadata. 
+Sensitivity was higher than specificity, suggesting the model is better at identifying highly cited papers than low‑cited ones.
+</p>
 
 <h3>Decision Trees Generated</h3>
 
 <p>
-Below are three different Decision Trees created by adjusting depth, splitting criteria, or pruning parameters.
+Below are three different Decision Trees created by adjusting splitting criteria and pruning parameters.
 </p>
 
-<!-- TREE 1 -->
 <img src="images/dt_tree1.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
-
-<!-- TREE 2 -->
 <img src="images/dt_tree2.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
-
-<!-- TREE 3 -->
 <img src="images/dt_tree3.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
 
 <p>
-Each tree differs based on hyperparameters such as maximum depth, minimum samples per split, or the impurity measure used (GINI vs. Entropy). 
-These differences affect how the model generalizes and what patterns it prioritizes.
+Tree 1 uses the default GINI impurity measure, Tree 2 uses Entropy (Information Gain), and Tree 3 applies cost‑complexity pruning. 
+These variations demonstrate how impurity metrics and pruning influence model complexity, depth, and interpretability.
 </p>
 
 <hr>
-
-<!-- ========================= -->
-<!--       CONCLUSIONS        -->
-<!-- ========================= -->
 
 <h2>Conclusions</h2>
 
@@ -310,18 +313,24 @@ Based on the splits chosen by the algorithm, the most important features influen
 </p>
 
 <ul>
-    <li><strong>[Insert Feature 1]</strong></li>
-    <li><strong>[Insert Feature 2]</strong></li>
-    <li><strong>[Insert Feature 3]</strong></li>
+    <li><strong>journal_name</strong> – Certain journals consistently publish papers that receive higher citation counts.</li>
+    <li><strong>venue</strong> – Publication venues differ substantially in their typical citation impact.</li>
+    <li><strong>referencecount</strong> – Papers with more references tend to be more influential and more frequently cited.</li>
 </ul>
 
 <p>
-The model achieved an accuracy of <strong>XX.X%</strong>, indicating that it can reasonably predict outcomes related to the project topic. 
-The multiple trees generated also demonstrated how different hyperparameters influence model complexity and interpretability.
+The model achieved an accuracy of <strong>82.91%</strong>, indicating that bibliometric metadata contains meaningful signal for predicting whether a paper will be highly cited. 
+Although the model misclassified some papers, especially low‑cited ones, the overall performance demonstrates substantial agreement beyond chance (Kappa = 0.6341).
 </p>
 
 <p>
-Overall, Decision Trees provided clear, interpretable insights into the structure of the data and helped identify the most influential predictors for the topic being studied.
+The three Decision Trees generated also illustrated how impurity measures (GINI vs. Entropy) and pruning strategies affect model complexity and interpretability. 
+Pruned trees were simpler and easier to interpret, while unpruned trees captured more detailed structure at the cost of potential overfitting.
+</p>
+
+<p>
+Overall, Decision Trees provided clear, interpretable insights into the structure of the data and helped identify the most influential predictors of citation impact. 
+These results form a strong baseline for comparison with more advanced models such as SVMs, Random Forests, and Neural Networks.
 </p>
 
 </body>
