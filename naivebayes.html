@@ -147,7 +147,7 @@
 <figure>
     <img src="images/test_set.png" alt="Testing Set Sample" width="500">
     <figcaption>
-        Figure Y: Sample of the Testing Set (first 10 rows).
+        Figure 6: Sample of the Testing Set (first 10 rows).
     </figcaption>
 </figure>
 
@@ -171,33 +171,23 @@
     <p>
         Below is the code used to train and evaluate the Multinomial Naïve Bayes model.  
         The full script is linked for reference, and a short excerpt is included here 
-        to illustrate the workflow. If using Python/Sklearn, all features must be numeric.  
-        R can handle mixed data types natively.
+        to illustrate the workflow.
     </p>
 
     <p>
-        <a href="code/naive_bayes_code.R">R Code</a> |
+        <a href="code/naive_bayes_code.R">R Code</a>
     </p>
 
-    <pre>
-# Example (Python)
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import confusion_matrix, accuracy_score
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-model = MultinomialNB()
-model.fit(X_train, y_train)
-preds = model.predict(X_test)
-    </pre>
-
-    <figure>
-        <img src="images/nb_code_example.png" alt="Naïve Bayes Code Example" width="500">
-        <figcaption>
-            Screenshot of the Naïve Bayes training code.  
-            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
+    <p>
+        The code works by first loading the cleaned dataset and selecting the metadata 
+        features used as predictors. A new supervised label (<code>high_cited</code> vs. 
+        <code>low_cited</code>) is created based on whether each paper’s citation count 
+        is above or below the median. After converting categorical variables and removing 
+        missing values, the dataset is split into an 80% Training Set and a 20% Testing Set. 
+        The Naïve Bayes model is trained on the Training Set, and predictions are generated 
+        for the Testing Set. Finally, the model’s performance is evaluated using a confusion 
+        matrix and accuracy metrics to assess how well it generalizes to unseen data.
+    </p>
 </section>
 
 <hr>
