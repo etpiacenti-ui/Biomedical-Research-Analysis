@@ -174,10 +174,6 @@ Because of these factors, even a modest dataset can yield an enormous—effectiv
 This flexibility is both a strength and a weakness: while it allows Decision Trees to model complex patterns, it also makes them prone to overfitting unless regularization techniques are applied.
 </p>
 
-<!-- ========================= -->
-<!--        DATA PREP         -->
-<!-- ========================= -->
-
 <h2>Data Preparation</h2>
 
 <p>
@@ -200,11 +196,11 @@ The Training and Testing sets must be disjoint to ensure that the model is evalu
 <p>Below is a small sample of the dataset used for Decision Trees:</p>
 
 <!-- DATA SAMPLE IMAGE -->
-<img src="images/dt_dataset_sample.png" alt="Dataset Sample" style="width:60%; margin:10px;">
+<img src="images/labeled_unsup_data_sample.png" alt="Dataset Sample" style="width:60%; margin:10px;">
 
 <p>
 Dataset link:  
-<a href="YOUR_DATASET_LINK_HERE" target="_blank">Click here to view dataset sample</a>
+<a href="https://drive.google.com/file/d/144sn-bBnodfNZI7p2OBMuON0btEQwUdZ/view?usp=drive_link" target="_blank">Download</a>
 </p>
 
 <h3>Training and Testing Sets</h3>
@@ -215,20 +211,18 @@ This ensures the model has enough data to learn patterns while still being evalu
 </p>
 
 <!-- TRAINING SET IMAGE -->
-<img src="images/dt_train_sample.png" alt="Training Set Sample" style="width:45%; margin:10px;">
-
-<!-- TESTING SET IMAGE -->
-<img src="images/dt_test_sample.png" alt="Testing Set Sample" style="width:45%; margin:10px;">
-
+<img src="images/train_set.png" alt="Training Set Sample" style="width:45%; margin:10px;">
 <p>
-The two sets are completely disjoint, meaning no row appears in both. This prevents data leakage and ensures an honest evaluation of model performance.
+Dataset link:  
+<a href="https://drive.google.com/file/d/10ocl9q_bE0wEn3m6IvCfVd81YP2In0hQ/view?usp=drive_link"_blank">Download</a>
 </p>
-
+<!-- TESTING SET IMAGE -->
+<img src="images/test_set.png" alt="Testing Set Sample" style="width:45%; margin:10px;">
+<p>
+Dataset link:  
+<a href="https://drive.google.com/file/d/1OXuYb5OT-FLC9XHnHmrqao0uqX3KUaFa/view?usp=drive_link" target="_blank">Download</a>
+</p>
 <hr>
-
-<!-- ========================= -->
-<!--          CODE            -->
-<!-- ========================= -->
 
 <h2>Code</h2>
 
@@ -240,17 +234,10 @@ Python requires numeric data only, while R can handle mixed data types.
 
 <p>
 Code link:  
-<a href="YOUR_CODE_LINK_HERE" target="_blank">View Decision Tree Code</a>
+<a href="decision_tree.R" target="_blank">View Decision Tree Code</a>
 </p>
 
-<!-- OPTIONAL: code snippet placeholder -->
-<pre>
-# Example placeholder (replace with your actual code or link)
-from sklearn.tree import DecisionTreeClassifier
-model = DecisionTreeClassifier(criterion="entropy", max_depth=4)
-model.fit(X_train, y_train)
-preds = model.predict(X_test)
-</pre>
+description of how code works!!!!
 
 <hr>
 
