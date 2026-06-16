@@ -202,26 +202,47 @@
         These results help determine how well Naïve Bayes captures the structure of the data.
     </p>
 
-    <!-- Confusion Matrix -->
     <figure>
-        <img src="images/confusion_matrix_nb.png" alt="Confusion Matrix" width="450">
+        <img src="images/confusion_matrix.png" alt="Confusion Matrix" width="450">
         <figcaption>
-            Confusion matrix for Naïve Bayes predictions.  
-            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+            Figure 7: Confusion matrix for Naïve Bayes predictions.  
+        </figcaption>
+    </figure>
+    
+    <figure>
+        <img src="images/accuracy_viz.png" alt="Accuracy Plot" width="450">
+        <figcaption>
+            Figure 8: Visualization of model accuracy on the Testing Set.  
         </figcaption>
     </figure>
 
-    <!-- Accuracy Visualization -->
-    <figure>
-        <img src="images/nb_accuracy_plot.png" alt="Accuracy Plot" width="450">
-        <figcaption>
-            Visualization of model accuracy on the Testing Set.  
-            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
+    <p>
+        <strong>Accuracy:</strong> 93.11%  
+        <br>
+        <strong>Sensitivity (High-Cited Detection):</strong> 90.70%  
+        <br>
+        <strong>Specificity (Low-Cited Detection):</strong> 97.03%  
+        <br>
+        <strong>Positive Predictive Value:</strong> 98.02%  
+        <br>
+        <strong>Kappa:</strong> 0.8574 (excellent agreement)  
+    </p>
 
-    <p><strong>Accuracy:</strong> INSERT_VALUE_HERE</p>
-</section>
+    <p>
+        The model correctly identified 31,722 high‑cited papers and 20,932 low‑cited papers. 
+        Misclassifications were relatively rare: only 640 low‑cited papers were incorrectly 
+        labeled as high‑cited, and 3,254 high‑cited papers were misclassified as low‑cited. 
+        The high specificity indicates that the model is especially strong at recognizing 
+        low‑cited papers, while the high precision for the high‑cited class shows that 
+        false positives are uncommon.
+    </p>
+
+    <p>
+        The accuracy of 93.11% is substantially higher than the No‑Information Rate (61.85%), 
+        and the p‑value (< 2.2e‑16) confirms that this improvement is statistically significant. 
+        The balanced accuracy of 93.86% further demonstrates that the model performs well across 
+        both classes, even though the dataset is moderately imbalanced.
+    </p>
 
 <hr>
 
