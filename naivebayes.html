@@ -73,43 +73,68 @@
 <hr>
 
 <section id="dataprep">
-    <h2>Data Preparation</h2>
+<h2>Data Preparation</h2>
 
-    <p>
-        Because Naïve Bayes is a supervised learning method, it requires a dataset with clearly defined 
-        labels so the model can learn the relationship between features and outcomes. Before training 
-        the model, the data must be cleaned, structured, and converted into a format suitable for 
-        Multinomial NB—typically numeric counts or TF‑IDF values. Only labeled data can be used for 
-        supervised modeling, so any unlabeled observations are excluded from this stage.
-    </p>
+<p>
+    Naïve Bayes is a supervised learning method, which means it requires a dataset 
+    with clearly defined labels. The original biomedical metadata dataset did not 
+    contain a natural outcome variable, so I created a binary label based on citation 
+    impact. Papers with citation counts above the median were labeled 
+    <strong>high_cited</strong>, and those below were labeled <strong>low_cited</strong>. 
+    This converts the dataset into a supervised classification problem suitable for 
+    Naïve Bayes.
+</p>
 
-    <p>
-        After cleaning and labeling the dataset, the next step is creating a disjoint Train/Test split. 
-        The Training Set is used to estimate the NB parameters (class priors and conditional 
-        likelihoods), while the Testing Set provides an unbiased evaluation of how well the model 
-        generalizes to unseen data. In this project, I used an 80/20 split, ensuring that no 
-        observations appear in both sets. This separation is essential to prevent information leakage 
-        and to produce a realistic estimate of model performance.
-    </p>
+<p>
+    Only labeled observations can be used for supervised modeling, so any rows with 
+    missing values in the predictor or label columns were removed. The predictors used 
+    in this analysis include publication year, reference count, citation count, 
+    influential citation count, open-access status, venue, journal name, and the 
+    primary field of study. These metadata features form the input variables the model 
+    uses to learn patterns associated with high- versus low-citation papers.
+</p>
 
-    <figure>
-        <img src="images/sample_data.png" alt="Sample of Labeled Data" width="500">
-        <figcaption>
-            Sample of the cleaned, labeled dataset used for Naïve Bayes.  
-            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
+<p>
+    After labeling the dataset, I created a disjoint Train/Test split. The 
+    <strong>Training Set (80%)</strong> is used to estimate the Naïve Bayes parameters 
+    (class priors and conditional likelihoods), while the 
+    <strong>Testing Set (20%)</strong> provides an unbiased evaluation of how well the 
+    model generalizes to unseen data. The two sets must be completely disjoint to 
+    prevent information leakage—if the model sees the same papers during both training 
+    and testing, the accuracy would be artificially inflated.
+</p>
 
-    <figure>
-        <img src="images/train_test_split.png" alt="Train Test Split" width="500">
-        <figcaption>
-            Visualization of the Training and Testing sets used in the model.  
-            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
+<figure>
+    <img src="images/unsup_data_sample" alt="Sample of Original Data" width="500">
+    <figcaption>
+        Figure 3: Sample of the dataset prior to labeling.  
+        <br>
+        Source: 
+        <a href="biomed_clean_papers.csv" target="_blank">Download original sample</a>
+    </figcaption>
+</figure>
 
-    <p><a href="data/sample_data.csv">Download sample data</a></p>
-    <p><a href="data/train_test_split.csv">Download train/test split</a></p>
+<figure>
+    <img src="images/labeled_unsup_data_sample.png" alt="Sample of Labeled Data" width="500">
+    <figcaption>
+        Figure 4: Sample of the dataset after labeling.  
+        <br>
+        Source: 
+        <a href="labeled_biomed_data.csv" target="_blank">Download labeled sample</a>
+    </figcaption>
+</figure>
+    
+<figure>
+    <img src="images/train_test_split.png" alt="Train Test Split" width="500">
+    <figcaption>
+        Visualization of the Training and Testing sets used in the model.  
+        Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+    </figcaption>
+</figure>
+
+<p><a href="data/sample_data.csv">Download sample data</a></p>
+<p><a href="data/train_test_split.csv">Download train/test split</a></p>
+
 </section>
 
 <hr>
