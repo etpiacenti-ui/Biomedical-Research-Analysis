@@ -30,16 +30,32 @@
 
     <p>
         Naïve Bayes is a family of probabilistic classifiers built around Bayes’ Theorem and the idea 
-        that features become conditionally independent once the class label is known. Even though this 
+        that features become conditionally independent once the class label is known (Fig. 1). Even though this 
         assumption is clearly an oversimplification, the model ends up performing surprisingly well in 
         real‑world settings, especially when the data is high‑dimensional. In practice, Naïve Bayes 
         learns how likely each feature is within each class and combines those likelihoods with the 
-        class priors to compute a posterior probability for every possible label. The version most 
+        class priors to compute a posterior probability for every possible label, as shown in Fig. 2. The version most 
         relevant to this project is Multinomial Naïve Bayes, which is commonly used for text or 
         count‑based features because it models term frequencies and other non‑negative numeric 
         representations extremely efficiently.
     </p>
 
+    <figure>
+        <img src="images/naive_bayes_classification.png" alt="Naïve Bayes Flowchart" width="400">
+        <figcaption>
+            Naïve Bayes classifier for computing class probabilities.  
+            Source: <a href="https://www.linkedin.com/pulse/naive-bayes-classifier-beginners-guide-muqadas-rasheed-/" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="images/bayes_theorem.png" alt="Naïve Bayes Diagram" width="400">
+        <figcaption>
+            Mathmatical overiview of Bayes Theorem.  
+            Source: <a href="https://uc-r.github.io/naive_bayes" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+    
     <p>
         A key detail in Naïve Bayes is the need for smoothing. If a feature never appears in a 
         particular class during training, the model would assign that feature a probability of zero, 
@@ -52,21 +68,6 @@
         variables—making it a flexible alternative depending on the structure of the dataset.
     </p>
 
-    <figure>
-        <img src="images/bayes_theorem.png" alt="Naïve Bayes Diagram" width="400">
-        <figcaption>
-            Conceptual diagram of the Naïve Bayes conditional independence structure.  
-            Source: <a href="https://uc-r.github.io/naive_bayes" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
-
-    <figure>
-        <img src="images/naive_bayes_classification.png" alt="Naïve Bayes Flowchart" width="400">
-        <figcaption>
-            High‑level flowchart showing how Naïve Bayes computes class probabilities.  
-            Source: <a href="https://www.linkedin.com/pulse/naive-bayes-classifier-beginners-guide-muqadas-rasheed-/" target="_blank">PASTE_URL_HERE</a>
-        </figcaption>
-    </figure>
 </section>
 
 <hr>
