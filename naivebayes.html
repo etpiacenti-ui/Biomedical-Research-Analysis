@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Naive Bayes</title>
+    <title>Naïve Bayes</title>
 </head>
 
 <body>
@@ -11,8 +11,8 @@
     <a href="introduction.html">Introduction</a> |
     <a href="dataprep.html">DataPrep/EDA</a> |
     <a href="clustering.html">Clustering</a> |
-    <a href="pca.html">PCA</a>
-    <a href="naivebayes.html">Naive Bayes</a> |
+    <a href="pca.html">PCA</a> |
+    <a href="naivebayes.html">Naïve Bayes</a> |
     <a href="decisiontrees.html">Decision Trees</a> |
     <a href="arm.html">ARM</a> |
     <a href="svm.html">SVMs</a> |
@@ -23,9 +23,186 @@
 
 <hr>
 
-<h1>Naive Bayes</h1>
+<h1>Naïve Bayes</h1>
 
-<p>This section will be completed during Module 3.</p>
+<section id="overview">
+    <h2>Overview</h2>
+
+    <p>
+        Naïve Bayes is a family of probabilistic classifiers built around Bayes’ Theorem and the idea 
+        that features become conditionally independent once the class label is known. Even though this 
+        assumption is clearly an oversimplification, the model ends up performing surprisingly well in 
+        real‑world settings, especially when the data is high‑dimensional. In practice, Naïve Bayes 
+        learns how likely each feature is within each class and combines those likelihoods with the 
+        class priors to compute a posterior probability for every possible label. The version most 
+        relevant to this project is Multinomial Naïve Bayes, which is commonly used for text or 
+        count‑based features because it models term frequencies and other non‑negative numeric 
+        representations extremely efficiently.
+    </p>
+
+    <p>
+        A key detail in Naïve Bayes is the need for smoothing. If a feature never appears in a 
+        particular class during training, the model would assign that feature a probability of zero, 
+        which would immediately zero‑out the entire posterior for that class. Laplace (add‑one) or 
+        Lidstone (add‑α) smoothing prevents this by adding a small constant to all feature counts, 
+        ensuring the model remains stable and can handle previously unseen terms. Alongside the 
+        multinomial version, there is also Bernoulli Naïve Bayes, which is designed for binary 
+        presence/absence features rather than counts. Bernoulli NB is useful when the data naturally 
+        reflects whether a feature occurs at least once—such as keyword flags or one‑hot encoded 
+        variables—making it a flexible alternative depending on the structure of the dataset.
+    </p>
+
+    <figure>
+        <img src="images/nb_diagram.png" alt="Naïve Bayes Diagram" width="400">
+        <figcaption>
+            Conceptual diagram of the Naïve Bayes conditional independence structure.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="images/nb_flowchart.png" alt="Naïve Bayes Flowchart" width="400">
+        <figcaption>
+            High‑level flowchart showing how Naïve Bayes computes class probabilities.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+</section>
+
+<hr>
+
+<section id="dataprep">
+    <h2>Data Preparation</h2>
+
+    <p>
+        Because Naïve Bayes is a supervised learning method, it requires a dataset with clearly defined 
+        labels so the model can learn the relationship between features and outcomes. Before training 
+        the model, the data must be cleaned, structured, and converted into a format suitable for 
+        Multinomial NB—typically numeric counts or TF‑IDF values. Only labeled data can be used for 
+        supervised modeling, so any unlabeled observations are excluded from this stage.
+    </p>
+
+    <p>
+        After cleaning and labeling the dataset, the next step is creating a disjoint Train/Test split. 
+        The Training Set is used to estimate the NB parameters (class priors and conditional 
+        likelihoods), while the Testing Set provides an unbiased evaluation of how well the model 
+        generalizes to unseen data. In this project, I used an 80/20 split, ensuring that no 
+        observations appear in both sets. This separation is essential to prevent information leakage 
+        and to produce a realistic estimate of model performance.
+    </p>
+
+    <figure>
+        <img src="images/sample_data.png" alt="Sample of Labeled Data" width="500">
+        <figcaption>
+            Sample of the cleaned, labeled dataset used for Naïve Bayes.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <figure>
+        <img src="images/train_test_split.png" alt="Train Test Split" width="500">
+        <figcaption>
+            Visualization of the Training and Testing sets used in the model.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <p><a href="data/sample_data.csv">Download sample data</a></p>
+    <p><a href="data/train_test_split.csv">Download train/test split</a></p>
+</section>
+
+<hr>
+
+<section id="code">
+    <h2>Code</h2>
+
+    <p>
+        Below is the code used to train and evaluate the Multinomial Naïve Bayes model.  
+        The full script is linked for reference, and a short excerpt is included here 
+        to illustrate the workflow. If using Python/Sklearn, all features must be numeric.  
+        R can handle mixed data types natively.
+    </p>
+
+    <p>
+        <a href="code/naive_bayes_code.R">R Code</a> |
+        <a href="code/naive_bayes_code.py">Python Code</a>
+    </p>
+
+    <pre>
+# Example (Python)
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = MultinomialNB()
+model.fit(X_train, y_train)
+preds = model.predict(X_test)
+    </pre>
+
+    <figure>
+        <img src="images/nb_code_example.png" alt="Naïve Bayes Code Example" width="500">
+        <figcaption>
+            Screenshot of the Naïve Bayes training code.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+</section>
+
+<hr>
+
+<section id="results">
+    <h2>Results</h2>
+
+    <p>
+        After training the model, I evaluated its performance on the Testing Set.  
+        The confusion matrix summarizes how many predictions were correct versus incorrect 
+        for each class, while the accuracy score provides an overall measure of performance.  
+        These results help determine how well Naïve Bayes captures the structure of the data.
+    </p>
+
+    <!-- Confusion Matrix -->
+    <figure>
+        <img src="images/confusion_matrix_nb.png" alt="Confusion Matrix" width="450">
+        <figcaption>
+            Confusion matrix for Naïve Bayes predictions.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <!-- Accuracy Visualization -->
+    <figure>
+        <img src="images/nb_accuracy_plot.png" alt="Accuracy Plot" width="450">
+        <figcaption>
+            Visualization of model accuracy on the Testing Set.  
+            Source: <a href="PASTE_URL_HERE" target="_blank">PASTE_URL_HERE</a>
+        </figcaption>
+    </figure>
+
+    <p><strong>Accuracy:</strong> INSERT_VALUE_HERE</p>
+</section>
+
+<hr>
+
+<section id="conclusions">
+    <h2>Conclusions</h2>
+
+    <p>
+        Overall, the Naïve Bayes model provided a clear baseline for understanding how the features in 
+        this dataset relate to the target labels. The model performed well on classes with distinctive 
+        feature patterns and struggled more with classes that had overlapping distributions. These 
+        results highlight both the strengths and limitations of Naïve Bayes: it is fast, interpretable, 
+        and effective for high‑dimensional data, but it can be sensitive to violations of the 
+        independence assumption.
+    </p>
+
+    <p>
+        From a topic perspective, the model helped identify which features were most predictive and 
+        which categories were harder to distinguish. This provides a foundation for comparing Naïve 
+        Bayes to more complex models later in the project, such as Decision Trees, SVMs, and Neural 
+        Networks.
+    </p>
+</section>
 
 </body>
 </html>
