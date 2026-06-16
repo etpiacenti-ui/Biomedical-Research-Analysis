@@ -34,7 +34,7 @@
         assumption is clearly an oversimplification, the model ends up performing surprisingly well in 
         real‑world settings, especially when the data is high‑dimensional. In practice, Naïve Bayes 
         learns how likely each feature is within each class and combines those likelihoods with the 
-        class priors to compute a posterior probability for every possible label, as shown in Fig. 2. The version most 
+        class priors to compute a posterior probability for every possible label, (mathmatically shown in Fig. 2). The version most 
         relevant to this project is Multinomial Naïve Bayes, which is commonly used for text or 
         count‑based features because it models term frequencies and other non‑negative numeric 
         representations extremely efficiently.
@@ -57,11 +57,11 @@
     </figure>
     
     <p>
-        A key detail in Naïve Bayes is the need for smoothing. If a feature never appears in a 
-        particular class during training, the model would assign that feature a probability of zero, 
-        which would immediately zero‑out the entire posterior for that class. Laplace (add‑one) or 
-        Lidstone (add‑α) smoothing prevents this by adding a small constant to all feature counts, 
-        ensuring the model remains stable and can handle previously unseen terms. Alongside the 
+        NB models rely on estimating conditional probabilities. If a feature never appears 
+        in a class during training, its probability becomes zero, which would zero‑out the 
+        entire posterior for that class. Laplace (add‑one) or Lidstone (add‑α) smoothing 
+        prevents zero probabilities by adding a small constant to all feature counts. 
+        This ensures that the model remains robust and can handle previously unseen terms. Alongside the 
         multinomial version, there is also Bernoulli Naïve Bayes, which is designed for binary 
         presence/absence features rather than counts. Bernoulli NB is useful when the data naturally 
         reflects whether a feature occurs at least once—such as keyword flags or one‑hot encoded 
