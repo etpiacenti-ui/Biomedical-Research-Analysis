@@ -250,18 +250,26 @@
     <h2>Conclusions</h2>
 
     <p>
-        Overall, the Naïve Bayes model provided a clear baseline for understanding how the features in 
-        this dataset relate to the target labels. The model performed well on classes with distinctive 
-        feature patterns and struggled more with classes that had overlapping distributions. These 
-        results highlight both the strengths and limitations of Naïve Bayes: it is fast, interpretable, 
-        and effective for high‑dimensional data, but it can be sensitive to violations of the 
-        independence assumption.
+        The Naïve Bayes classifier provided a strong baseline model for predicting whether a 
+        scientific paper is likely to be highly cited based solely on its metadata. With an 
+        accuracy of 93.11% and excellent sensitivity and specificity, the model demonstrated 
+        that simple bibliometric features—such as publication year, reference count, venue, 
+        and influential citation count—carry substantial predictive power.
+    </p>
+
+    <p>
+        The model’s high precision for the <code>high_cited</code> class indicates that when 
+        it predicts a paper will be highly cited, it is almost always correct. However, the 
+        lower negative predictive value suggests that distinguishing borderline cases remains 
+        more challenging. This is expected, as citation behavior is influenced by many 
+        unobserved factors (e.g., topic trends, author reputation, collaboration networks) 
+        that are not captured in the metadata.
     </p>
 
     <p>
         From a topic perspective, the model helped identify which features were most predictive and 
         which categories were harder to distinguish. This provides a foundation for comparing Naïve 
-        Bayes to more complex models later in the project, such as Decision Trees, SVMs, and Neural 
+        Bayes to other models later, e.g., Decision Trees, SVMs, and Neural 
         Networks.
     </p>
 </section>
