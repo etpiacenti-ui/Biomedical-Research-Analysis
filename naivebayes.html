@@ -78,8 +78,8 @@
 <p>
     Naïve Bayes is a supervised learning method, which means it requires a dataset 
     with clearly defined labels. The original biomedical metadata dataset did not 
-    contain a natural outcome variable, so I created a binary label based on citation 
-    impact. Papers with citation counts above the median were labeled 
+    contain a natural outcome variable, so a binary label based on citation 
+    impact was created. Papers with citation counts above the median were labeled 
     <strong>high_cited</strong>, and those below were labeled <strong>low_cited</strong>. 
     This converts the dataset into a supervised classification problem suitable for 
     Naïve Bayes.
@@ -95,7 +95,7 @@
 </p>
 
 <p>
-    After labeling the dataset, I created a disjoint Train/Test split. The 
+    After labeling the dataset, a disjoint Train/Test split was then created. The 
     <strong>Training Set (80%)</strong> is used to estimate the Naïve Bayes parameters 
     (class priors and conditional likelihoods), while the 
     <strong>Testing Set (20%)</strong> provides an unbiased evaluation of how well the 
@@ -196,7 +196,7 @@
     <h2>Results</h2>
 
     <p>
-        After training the model, I evaluated its performance on the Testing Set.  
+        After training the model,its performance was evaluated on the Testing Set.  
         The confusion matrix summarizes how many predictions were correct versus incorrect 
         for each class, while the accuracy score provides an overall measure of performance.  
         These results help determine how well Naïve Bayes captures the structure of the data.
@@ -253,7 +253,7 @@
         The Naïve Bayes classifier provided a strong baseline model for predicting whether a 
         scientific paper is likely to be highly cited based solely on its metadata. With an 
         accuracy of 93.11% and excellent sensitivity and specificity, the model demonstrated 
-        that simple bibliometric features—such as publication year, reference count, venue, 
+        that simple bibliometric features, e.g., publication year, reference count, venue, 
         and influential citation count—carry substantial predictive power.
     </p>
 
@@ -267,10 +267,9 @@
     </p>
 
     <p>
-        From a topic perspective, the model helped identify which features were most predictive and 
+        As has been demonstrated, the model helped identify which features were most predictive and 
         which categories were harder to distinguish. This provides a foundation for comparing Naïve 
-        Bayes to other models later, e.g., Decision Trees, SVMs, and Neural 
-        Networks.
+        Bayes to other models later, e.g., Decision Trees, SVMs, and Neural Networks.
     </p>
 </section>
 
