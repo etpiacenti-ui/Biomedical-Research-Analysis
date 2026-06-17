@@ -232,7 +232,16 @@ Code link:
 <a href="decision_tree.R" target="_blank">View Decision Tree Code</a>
 </p>
 
-description of how code works!!!!
+<p>
+The R code builds a supervised decision tree model to classify biomedical papers as
+high- or low-cited. After loading the cleaned dataset, the script selects relevant
+predictors and creates a binary label based on whether each paper’s citation count
+is above the median. Categorical variables are converted to factors, and
+high-cardinality fields such as journal and venue are simplified using lumping to
+prevent overfitting. The data is then split into an 80/20 train–test set.
+Three decision trees are trained: a simple Gini-based tree, an entropy-based tree with
+pruning, and a pruned version of a deeper model with additional category reduction. 
+</p>
 
 <hr>
 
@@ -290,8 +299,8 @@ Below are three different Decision Trees created by adjusting splitting criteria
 </p>
 
 <img src="images/dt1_gini.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
-<img src="images/dt_tree2.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
-<img src="images/dt_tree3.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
+<img src="images/dt2_entropy.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
+<img src="images/dt3_pruned.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
 
 <p>
 Tree 1 uses the default GINI impurity measure, Tree 2 uses Entropy (Information Gain), and Tree 3 applies cost‑complexity pruning. 
