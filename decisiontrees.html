@@ -190,9 +190,11 @@ The Training and Testing sets must be disjoint to ensure that the model is evalu
 
 <p>Below is a sample of the labeled dataset used for Decision Trees:</p>
 
-<!-- DATA SAMPLE IMAGE -->
-<img src="images/labeled_unsup_data_sample.png" alt="Dataset Sample" style="width:60%; margin:10px;">
-
+<figure>
+    <img src="images/labeled_unsup_data_sample.png" alt="Dataset Sample" style="width:60%; margin:10px;">
+    <figcaption><strong>Figure 3.</strong> Sample of the labeled dataset used for Decision Trees.</figcaption>
+</figure>
+    
 <p>
 Dataset link:  
 <a href="https://drive.google.com/file/d/144sn-bBnodfNZI7p2OBMuON0btEQwUdZ/view?usp=drive_link" target="_blank">Download</a>
@@ -205,14 +207,21 @@ The dataset was split into training and testing subsets using an 80/20 split (or
 This ensures the model has enough data to learn patterns while still being evaluated fairly.
 </p>
 
-<!-- TRAINING SET IMAGE -->
-<img src="images/train_set.png" alt="Training Set Sample" style="width:45%; margin:10px;">
+<figure>
+    <img src="images/train_set.png" alt="Training Set Sample" style="width:45%; margin:10px;">
+    <figcaption><strong>Figure 4.</strong> Example rows from the Training Set (80% of data).</figcaption>
+</figure>
+
 <p>
 Dataset link:  
 <a href="https://drive.google.com/file/d/10ocl9q_bE0wEn3m6IvCfVd81YP2In0hQ/view?usp=drive_link"_blank">Download</a>
 </p>
-<!-- TESTING SET IMAGE -->
-<img src="images/test_set.png" alt="Testing Set Sample" style="width:45%; margin:10px;">
+
+<figure>
+    <img src="images/test_set.png" alt="Testing Set Sample" style="width:45%; margin:10px;">
+    <figcaption><strong>Figure 5.</strong> Example rows from the Testing Set (20% of data).</figcaption>
+</figure>
+
 <p>
 Dataset link:  
 <a href="https://drive.google.com/file/d/1OXuYb5OT-FLC9XHnHmrqao0uqX3KUaFa/view?usp=drive_link" target="_blank">Download</a>
@@ -255,7 +264,10 @@ Removing <code>citationcount</code> from the predictor set prevented label leaka
 
 <h3>Confusion Matrix</h3>
 
-<img src="images/dt_confusion_matrix.png" alt="Confusion Matrix" style="width:50%; margin:10px;">
+<figure>
+    <img src="images/dt_confusion_matrix.png" alt="Confusion Matrix" style="width:50%; margin:10px;">
+    <figcaption><strong>Figure 6.</strong> Confusion matrix showing model predictions vs. actual labels.</figcaption>
+</figure>
 
 <p>
 The confusion matrix shows that the model correctly classified a large majority of both high‑cited and low‑cited papers. 
@@ -267,7 +279,7 @@ However, misclassifications occurred in both directions, reflecting the complexi
 <figure>
     <img src="images/dt_accuracy_viz1.png" alt="Accuracy Plot" width="450">
     <figcaption>
-        Figure 8: Visualization of Decision Tree accuracy compared to the No‑Information Rate.
+        Figure 7: Visualization of Decision Tree accuracy compared to the No‑Information Rate.
     </figcaption>
 </figure>
 
@@ -298,9 +310,20 @@ Sensitivity was higher than specificity, suggesting the model is better at ident
 Below are three different Decision Trees created by adjusting splitting criteria and pruning parameters.
 </p>
 
-<img src="images/dt1_gini.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
-<img src="images/dt2_entropy.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
-<img src="images/dt3_pruned.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
+<figure>
+    <img src="images/dt1_gini.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
+    <figcaption><strong>Figure 8.</strong> Decision Tree 1 using GINI impurity.</figcaption>
+</figure>
+
+<figure>
+    <img src="images/dt2_entropy.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
+    <figcaption><strong>Figure 9.</strong> Decision Tree 2 using Entropy (Information Gain) with pruning.</figcaption>
+</figure>
+
+<figure>
+    <img src="images/dt3_pruned.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
+    <figcaption><strong>Figure 10.</strong> Decision Tree 3 after cost‑complexity pruning.</figcaption>
+</figure>
 
 <p>
 Tree 1 uses the default GINI impurity measure, Tree 2 uses Entropy (Information Gain), and Tree 3 applies cost‑complexity pruning. 
