@@ -277,7 +277,7 @@ However, misclassifications occurred in both directions, reflecting overlap in b
 <figure>
     <img src="images/dt_accuracy_viz1.png" alt="Accuracy Plot" width="450">
     <figcaption>
-        <strong>Figure 7.<strong> Visualization of Decision Tree accuracy compared to the No‑Information Rate.
+        <strong>Figure 7.</strong>strong> Visualization of Decision Tree accuracy compared to the No‑Information Rate.
     </figcaption>
 </figure>
 
@@ -309,12 +309,12 @@ Below are three different Decision Trees created by adjusting splitting criteria
 </p>
 
 <figure>
-    <img src="images/dt1_gini.png" alt="Decision Tree 1" style="width:60%; margin:10px;">
+    <img src="images/dt1_gini.png" alt="Decision Tree 1" style="max-width:900px; width:100%; margin:10px;">
     <figcaption><strong>Figure 8.</strong> Decision Tree 1 using GINI impurity.</figcaption>
 </figure>
 
 <p>
-This GINI-based tree splits first on <strong>influentialcitationcount</strong>, showing that the presence of influential citations is the strongest predictor of whether a paper becomes highly cited. The tree incorporates additional splits on <strong>year</strong> and <strong>referencecount</strong>, which creates a detailed but complex structure. This depth also captures fine‑grained patterns but also increases the risk of overfitting.
+This GINI-based tree splits first on <strong>influentialcitationcount</strong>, showing that the presence of influential citations is the strongest predictor of whether a paper becomes highly cited. The tree incorporates additional splits on <strong>year</strong> and <strong>referencecount</strong>, which creates a detailed but complex structure. This depth captures fine‑grained patterns but also increases the risk of overfitting.
 </p>
 
 <figure>
@@ -325,7 +325,6 @@ This GINI-based tree splits first on <strong>influentialcitationcount</strong>, 
 <p>
 The Entropy-based tree also begins with <strong>influentialcitationcount</strong> as the primary split. Compared to the GINI tree, this model forms more balanced branches and uses pruning to remove weaker splits. The resulting structure highlights key predictors such as <strong>year</strong> and <strong>referencecount</strong> while improving interpretability and reducing noise.
 </p>
-
             
 <figure>
     <img src="images/dt3_pruned.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
