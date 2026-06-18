@@ -313,19 +313,27 @@ Below are three different Decision Trees created by adjusting splitting criteria
     <figcaption><strong>Figure 8.</strong> Decision Tree 1 using GINI impurity.</figcaption>
 </figure>
 
+<p>
+This GINI-based tree splits first on <strong>influentialcitationcount</strong>, showing that the presence of influential citations is the strongest predictor of whether a paper becomes highly cited. The tree incorporates additional splits on <strong>year</strong> and <strong>referencecount</strong>, which creates a detailed but complex structure. This depth also captures fine‑grained patterns but also increases the risk of overfitting.
+</p>
+
 <figure>
     <img src="images/dt2_entropy.png" alt="Decision Tree 2" style="width:60%; margin:10px;">
     <figcaption><strong>Figure 9.</strong> Decision Tree 2 using Entropy (Information Gain) with pruning.</figcaption>
 </figure>
 
+<p>
+The Entropy-based tree also begins with <strong>influentialcitationcount</strong> as the primary split. Compared to the GINI tree, this model forms more balanced branches and uses pruning to remove weaker splits. The resulting structure highlights key predictors such as <strong>year</strong> and <strong>referencecount</strong> while improving interpretability and reducing noise.
+</p>
+
+            
 <figure>
     <img src="images/dt3_pruned.png" alt="Decision Tree 3" style="width:60%; margin:10px;">
     <figcaption><strong>Figure 10.</strong> Decision Tree 3 after cost‑complexity pruning.</figcaption>
 </figure>
 
 <p>
-Tree 1 uses the default GINI impurity measure, Tree 2 uses Entropy (Information Gain), and Tree 3 applies cost‑complexity pruning. 
-These variations demonstrate how impurity metrics and pruning influence model complexity, depth, and interpretability.
+The cost‑complexity–pruned tree retains only the strongest predictors, beginning with <strong>influentialcitationcount</strong> and followed by simplified splits on <strong>referencecount</strong> and <strong>year</strong>. Its compact structure is designed to avoid overfitting and provides a clear, high‑level summary of how citation impact relates to a small set of influential metadata features.
 </p>
 
 <hr>
