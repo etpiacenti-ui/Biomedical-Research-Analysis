@@ -269,7 +269,7 @@ Removing <code>citationcount</code> from the predictor set prevented label leaka
 
 <p>
 The confusion matrix shows that the model correctly classified a large majority of both high‑cited and low‑cited papers. 
-However, misclassifications occurred in both directions, reflecting the complexity and overlap in bibliometric metadata.
+However, misclassifications occurred in both directions, reflecting overlap in bibliometric metadata.
 </p>
 
 <h3>Accuracy</h3>
@@ -277,7 +277,7 @@ However, misclassifications occurred in both directions, reflecting the complexi
 <figure>
     <img src="images/dt_accuracy_viz1.png" alt="Accuracy Plot" width="450">
     <figcaption>
-        Figure 7: Visualization of Decision Tree accuracy compared to the No‑Information Rate.
+        <strong>Figure 7.<strong> Visualization of Decision Tree accuracy compared to the No‑Information Rate.
     </figcaption>
 </figure>
 
@@ -333,7 +333,7 @@ These variations demonstrate how impurity metrics and pruning influence model co
 <h2>Conclusions</h2>
 
 <p>
-The Decision Tree model revealed several meaningful patterns in the dataset. 
+The Decision Tree model showed several meaningful patterns in the dataset. 
 Based on the splits chosen by the algorithm, the most important features influencing predictions were:
 </p>
 
@@ -346,9 +346,6 @@ Based on the splits chosen by the algorithm, the most important features influen
 <p>
 The model achieved an accuracy of <strong>82.91%</strong>, indicating that bibliometric metadata contains meaningful signal for predicting whether a paper will be highly cited. 
 Although the model misclassified some papers, especially low‑cited ones, the overall performance demonstrates substantial agreement beyond chance (Kappa = 0.6341).
-</p>
-
-<p>
 The three Decision Trees generated also illustrated how impurity measures (GINI vs. Entropy) and pruning strategies affect model complexity and interpretability. 
 Pruned trees were simpler and easier to interpret, while unpruned trees captured more detailed structure at the cost of potential overfitting.
 </p>
