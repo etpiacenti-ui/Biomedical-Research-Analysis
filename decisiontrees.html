@@ -32,7 +32,7 @@ Decision Trees (DTs) are supervised learning models that operate by recursively 
 At each stage of the tree-building process, the algorithm evaluates all possible splits across all available features and selects the split that maximally improves the purity of the resulting partitions. 
 This recursive partitioning continues until a stopping criterion is met, such as reaching a minimum node size (leaf node), achieving complete purity, or hitting a predefined maximum depth, as shown in Fig. 1. 
 The final structure resembles a hierarchical, tree-like model in which internal nodes represent decision rules, branches represent outcomes of those rules, and terminal nodes (leaves) represent predicted class labels or numerical values.
-An example of this can be seen in Fig. 2, where the dataset is partitioned along different candidate attributes—such as gender, participation in other sports, or academic grade level—and each potential split produces child nodes with
+An example of this can be seen in Fig. 2, where the dataset is partitioned along different candidate attributes, e.g., gender, participation in other sports, or academic grade level, and each potential split produces child nodes with
 distinct class distributions. These alternative partitions illustrate how the algorithm evaluates every feasible feature-based division, quantifies the resulting change in class purity, and ultimately selects the split that yields the
 greatest reduction in impurity. In this example, each candidate split produces subgroups with different proportions of students who play tennis, demonstrating how Decision Trees systematically compare these competing partitions to 
 determine the most informative branching structure.
@@ -62,7 +62,7 @@ A prediction can be explained simply by tracing the path from the root node to a
 
 <p>
 The central challenge in constructing a Decision Tree is determining which split at each node yields the greatest improvement in predictive structure. 
-To quantify the quality of a split, Decision Trees rely on impurity measures—mathematical functions that describe how mixed or uncertain the class distribution is within a node. 
+To quantify the quality of a split, Decision Trees rely on impurity measures, ie., mathematical functions that describe how mixed or uncertain the class distribution is within a node. 
 Two of the most widely used impurity metrics are <strong>GINI impurity</strong> and <strong>Entropy</strong>. 
 Both metrics reach their minimum value (0) when a node is perfectly pure (i.e., contains only one class), and both increase as the class distribution becomes more heterogeneous.
 </p>
@@ -109,11 +109,11 @@ Information Gain = Impurity(parent) − Weighted Impurity(children)
 The weighted impurity accounts for the relative sizes of the child nodes, ensuring that large impure nodes are penalized more heavily than small ones.
 </p>
 
-<h3>Small Example: Using Entropy + Information Gain</h3>
+<h3>Impurity Metric Example: Using Entropy + Information Gain</h3>
 
 <p>
-Consider a node containing 10 observations: 6 labeled “Yes” and 4 labeled “No.” 
-The entropy of this parent node is:
+Lets consider a node containing 10 observations: 6 labeled “Yes” and 4 labeled “No.” 
+The entropy of this parent node would therefore be:
 </p>
 
 <p style="margin-left:20px;">
@@ -138,7 +138,7 @@ The weighted entropy of the children is:
 </p>
 
 <p>
-Thus, the Information Gain is:
+Thus, the Information Gain would be:
 </p>
 
 <p style="margin-left:20px;">
@@ -146,15 +146,15 @@ IG = 0.97 − 0.845 = 0.125
 </p>
 
 <p>
-This value represents the reduction in uncertainty achieved by the split. 
-The algorithm compares this IG value with the IG values of all other possible splits and selects the split that maximizes impurity reduction.
+Interpretation: This value represents the reduction in uncertainty achieved by the split. 
+In this, the algorithm compares this IG value with the IG values of all other possible splits and selects the split that maximizes impurity reduction.
 </p>
 
-<h3>Why Infinite Trees Are Possible</h3>
+<h3>Why Are Infinite Trees Possible</h3>
 <p>
-It is theoretically possible to construct infinitely many Decision Trees from the same dataset because the structure of a tree is highly sensitive to the choices made during the splitting process. 
-Different algorithms employ different impurity measures, tie-breaking rules, and stopping criteria. 
-Even within a single algorithmic framework, the following factors contribute to the vast number of possible trees:
+It is theoretically possible to construct infinitely many Decision Trees from the same dataset because the structure of a tree is highly sensitive to the choices made during the splitting process, i.e.,
+different algorithms employ different impurity measures, tie-breaking rules, and stopping criteria. 
+So, even within a single algorithmic framework, the following factors contribute to the vast number of possible trees:
 </p>
 
 <ul>
@@ -165,7 +165,7 @@ Even within a single algorithmic framework, the following factors contribute to 
 </ul>
 
 <p>
-Because of these factors, even a modest dataset can yield an enormous—effectively infinite—space of valid tree structures. 
+Because of these factors, even a modest dataset can yield an enormous "effectively infinite" space of valid tree structures. 
 This flexibility is both a strength and a weakness: while it allows Decision Trees to model complex patterns, it also makes them prone to overfitting unless regularization techniques are applied.
 </p>
 
