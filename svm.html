@@ -190,9 +190,18 @@ Below is a sample of the dataset used for this project, along with images showin
 <h2>Code</h2>
 
 <p>
-The following R code performs SVM classification using three different kernels: linear, polynomial, and RBF. 
-The code trains the model, evaluates accuracy, and generates confusion matrices for each kernel. 
-A full version of the code is available at the link below.
+The following R code performs Support Vector Machine (SVM) classification using three different kernels: 
+(1) linear, (2) polynomial, and (3) radial basis function (RBF). The workflow begins by loading and cleaning the dataset, 
+filtering only the labeled rows and converting categorical variables into numeric form. Because SVMs require 
+numeric inputs, only the numeric predictor columns were kept for modeling.
+</p>
+
+<p>
+Next, the data was split into a 70% Training Set and a 30% Testing Set. The training features were scaled 
+using centering and standardization, and the same transformation was applied to the testing data. 
+Three SVM models were then trained—one for each kernel type. 
+Each model generated predictions on the testing set, and performance was evaluated using confusion matrices 
+and accuracy scores.
 </p>
 
 <p>
@@ -204,31 +213,93 @@ A full version of the code is available at the link below.
 <h2>Results</h2>
 
 <p>
-This section summarizes the performance of the SVM models using three kernels: linear, polynomial, and RBF. 
-For each kernel, the confusion matrix and accuracy score are shown. 
-Different cost (C) values were tested to observe how the margin and misclassification trade-off affected performance. 
-At least one visualization is included to compare decision boundaries or model performance across kernels. 
-The results help determine which kernel performed best for this dataset.
+This section summarizes the performance of the SVM models using three different kernels: linear, polynomial, 
+and RBF. Each model was trained on the scaled training data and evaluated on the testing set. 
+Confusion matrices, accuracy scores, and visualizations were generated to compare the kernels. 
+Different cost values were tested during development, and a cost of C = 1 produced stable and interpretable results 
+across all three kernels.
+</p>
+
+<h3>Linear Kernel</h3>
+<p>
+The linear SVM achieved <strong>perfect performance</strong> on this dataset, with an accuracy of <strong>100%</strong>. 
+Both classes were classified correctly with no misclassifications. This indicates that the dataset is 
+<strong>linearly separable</strong> in the scaled feature space, and a simple linear boundary is sufficient.
 </p>
 
 <div class="figure">
-    <img src="images/svm_confusion_linear.jpg" alt="Linear Kernel Confusion Matrix">
-    <p class="caption">Figure 6. Confusion matrix for the linear kernel.</p>
+    <img src="images/cm_linear.png" alt="Linear Kernel Confusion Matrix">
+    <p class="caption">Figure 8. Confusion matrix for the linear kernel.</p>
 </div>
 
-<div class="figure">
-    <img src="images/svm_confusion_poly.jpg" alt="Polynomial Kernel Confusion Matrix">
-    <p class="caption">Figure 7. Confusion matrix for the polynomial kernel.</p>
-</div>
+<pre>
+Accuracy: 1.000  
+Sensitivity: 1.000  
+Specificity: 1.000  
+Kappa: 1.000
+</pre>
+
+<h3>Polynomial Kernel</h3>
+<p>
+The polynomial kernel (degree = 3) achieved an accuracy of <strong>91.99%</strong>. 
+Although still strong, this kernel introduced unnecessary curvature and complexity, 
+leading to more misclassifications than the linear model. 
+This suggests that the polynomial transformation does not match the structure of the data as well.
+</p>
 
 <div class="figure">
-    <img src="images/svm_confusion_rbf.jpg" alt="RBF Kernel Confusion Matrix">
-    <p class="caption">Figure 8. Confusion matrix for the RBF kernel.</p>
+    <img src="images/cm_poly.png" alt="Polynomial Kernel Confusion Matrix">
+    <p class="caption">Figure 9. Confusion matrix for the polynomial kernel.</p>
 </div>
 
+<pre>
+Accuracy: 0.9199  
+Sensitivity: 0.9129  
+Specificity: 0.9311  
+Kappa: 0.8325
+</pre>
+
+<h3>RBF Kernel</h3>
+<p>
+The RBF kernel performed very well, achieving an accuracy of <strong>97.50%</strong>. 
+It captured nonlinear structure in the data and produced a flexible decision boundary. 
+However, it still did not outperform the linear kernel, reinforcing the conclusion that the classes 
+are fundamentally linearly separable.
+</p>
+
 <div class="figure">
-    <img src="images/svm_kernel_comparison.jpg" alt="Kernel Comparison Visualization">
-    <p class="caption">Figure 9. Visualization comparing SVM decision boundaries across kernels.</p>
+    <img src="images/cm_rbf.png" alt="RBF Kernel Confusion Matrix">
+    <p class="caption">Figure 10. Confusion matrix for the RBF kernel.</p>
+</div>
+
+<pre>
+Accuracy: 0.9750  
+Sensitivity: 0.9656  
+Specificity: 0.9903  
+Kappa: 0.9475
+</pre>
+
+<h3>Visualization of Feature Space</h3>
+<p>
+A PCA scatterplot of the training data (reduced to two principal components) shows clear separation 
+between the high_cited and low_cited classes. This visual separation supports the strong performance 
+of the linear SVM.
+</p>
+
+<div class="figure">
+    <img src="images/svm_pca.png" alt="PCA Visualization">
+    <p class="caption">Figure 11. PCA visualization of the training data after scaling.</p>
+</div>
+
+<h3>Kernel Comparison</h3>
+<p>
+The bar chart below compares the accuracy of all three kernels. 
+The linear kernel clearly outperforms the polynomial and RBF kernels, achieving perfect accuracy.
+</p>
+
+<div class="figure">
+    <img src="images/accuracy_kernel.png" alt="Kernel Comparison Visualization">
+    <p class="caption">Figure 12. Accuracy comparison across SVM kernels.</p>
 </div>
 
 <hr>
@@ -236,11 +307,14 @@ The results help determine which kernel performed best for this dataset.
 <h2>Conclusions</h2>
 
 <p>
-The SVM analysis provides insight into how different kernels perform on this dataset. 
-The linear kernel may work well when the classes are nearly linearly separable, while the polynomial and RBF kernels can capture more complex boundaries. 
-Based on accuracy and confusion matrices, the best-performing kernel for this dataset was ________. 
-This suggests that the underlying structure of the data is ________. 
-Overall, SVMs proved to be a powerful method for classification in this project, offering flexibility through kernel functions and strong performance across multiple configurations.
+The SVM analysis demonstrates how different kernel functions affect classification performance on this dataset. 
+The linear kernel achieved perfect accuracy, indicating that the relationship between the predictor variables 
+and the citation label is highly linear after scaling. The RBF kernel also performed extremely well, 
+but its added flexibility did not improve accuracy beyond the linear model. 
+The polynomial kernel performed the worst of the three, suggesting that introducing higher‑order interactions 
+does not match the underlying structure of the data.
+In sum, the <strong>linear kernel was the best-performing model</strong>. 
+This result suggests that the dataset is fundamentally linearly separable in the transformed feature space, and additional nonlinear transformations are unnecessary. 
 </p>
 
 </body>
