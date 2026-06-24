@@ -2,6 +2,28 @@
 <html>
 <head>
     <title>SVMs</title>
+
+    <style>
+        .figure {
+            text-align: center;
+            margin: 25px auto;
+            max-width: 700px;
+        }
+
+        .figure img {
+            width: 70%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 8px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,9 +43,119 @@
 
 <hr>
 
-<h1>Support Vector Machines</h1>
+<h1>Support Vector Machines (SVMs)</h1>
 
-<p>This section will be completed during Module 4.</p>
+<h2>Overview</h2>
+
+<p>
+Support Vector Machines (SVMs) are supervised learning models used for classification tasks. 
+They work by finding the optimal separating boundary—called a hyperplane—that maximizes the margin between classes. 
+SVMs are considered linear separators because, in their simplest form, they attempt to draw a straight line (in 2D) or a flat hyperplane (in higher dimensions) that best divides the data. 
+However, many real-world datasets are not linearly separable. 
+To address this, SVMs use <em>kernels</em>, which transform the data into a higher-dimensional space where a linear separator becomes possible. 
+The kernel trick allows this transformation to happen implicitly, without ever computing the high-dimensional coordinates directly. 
+This is why the dot product is essential: kernels rely on dot products to compute similarity in the transformed feature space. 
+Common kernels include the polynomial kernel and the radial basis function (RBF) kernel. 
+For example, a polynomial kernel with parameters \( r = 1 \) and \( d = 2 \) maps a 2D point into a higher-dimensional feature space that includes squared and interaction terms. 
+Below are two images illustrating how SVMs separate data and how kernels reshape the feature space.
+</p>
+
+<div class="figure">
+    <img src="images/svm_linear_example.jpg" alt="Linear SVM Example">
+    <p class="caption">Figure 1. A linear SVM separating two classes with a maximum-margin hyperplane.</p>
+</div>
+
+<div class="figure">
+    <img src="images/svm_kernel_example.jpg" alt="Kernel Trick Example">
+    <p class="caption">Figure 2. Illustration of how kernel functions transform data into higher dimensions.</p>
+</div>
+
+<hr>
+
+<h2>Data Preparation</h2>
+
+<p>
+SVMs require labeled data because they are supervised learning models. 
+This means each row in the dataset must include both predictor variables and a target class label. 
+Before training the model, the data must be split into a Training Set and a Testing Set. 
+The Training Set is used to build the model, while the Testing Set evaluates how well the model generalizes to new data. 
+These sets must be disjoint to avoid data leakage, which would artificially inflate accuracy. 
+SVMs also require numeric input features, so any categorical variables must be encoded. 
+Below is a sample of the dataset used for this project, along with images showing the Training and Testing splits.
+</p>
+
+<div class="figure">
+    <img src="images/sample_data.jpg" alt="Sample Data">
+    <p class="caption">Figure 3. Sample of the labeled dataset used for SVM classification. <a href="data/sample_data.csv">Link to data</a></p>
+</div>
+
+<div class="figure">
+    <img src="images/train_test_split.jpg" alt="Train Test Split">
+    <p class="caption">Figure 4. Visualization of the Training and Testing sets.</p>
+</div>
+
+<hr>
+
+<h2>Code</h2>
+
+<p>
+The following Python code performs SVM classification using three different kernels: linear, polynomial, and RBF. 
+The code trains the model, evaluates accuracy, and generates confusion matrices for each kernel. 
+A full version of the code is available at the link below.
+</p>
+
+<p>
+    <a href="https://github.com/yourrepo/svm_code.py" target="_blank">Link to full SVM Python code</a>
+</p>
+
+<div class="figure">
+    <img src="images/svm_code_snippet.jpg" alt="SVM Code Snippet">
+    <p class="caption">Figure 5. Snippet of the Python code used for SVM modeling.</p>
+</div>
+
+<hr>
+
+<h2>Results</h2>
+
+<p>
+This section summarizes the performance of the SVM models using three kernels: linear, polynomial, and RBF. 
+For each kernel, the confusion matrix and accuracy score are shown. 
+Different cost (C) values were tested to observe how the margin and misclassification trade-off affected performance. 
+At least one visualization is included to compare decision boundaries or model performance across kernels. 
+The results help determine which kernel performed best for this dataset.
+</p>
+
+<div class="figure">
+    <img src="images/svm_confusion_linear.jpg" alt="Linear Kernel Confusion Matrix">
+    <p class="caption">Figure 6. Confusion matrix for the linear kernel.</p>
+</div>
+
+<div class="figure">
+    <img src="images/svm_confusion_poly.jpg" alt="Polynomial Kernel Confusion Matrix">
+    <p class="caption">Figure 7. Confusion matrix for the polynomial kernel.</p>
+</div>
+
+<div class="figure">
+    <img src="images/svm_confusion_rbf.jpg" alt="RBF Kernel Confusion Matrix">
+    <p class="caption">Figure 8. Confusion matrix for the RBF kernel.</p>
+</div>
+
+<div class="figure">
+    <img src="images/svm_kernel_comparison.jpg" alt="Kernel Comparison Visualization">
+    <p class="caption">Figure 9. Visualization comparing SVM decision boundaries across kernels.</p>
+</div>
+
+<hr>
+
+<h2>Conclusions</h2>
+
+<p>
+The SVM analysis provides insight into how different kernels perform on this dataset. 
+The linear kernel may work well when the classes are nearly linearly separable, while the polynomial and RBF kernels can capture more complex boundaries. 
+Based on accuracy and confusion matrices, the best-performing kernel for this dataset was ________. 
+This suggests that the underlying structure of the data is ________. 
+Overall, SVMs proved to be a powerful method for classification in this project, offering flexibility through kernel functions and strong performance across multiple configurations.
+</p>
 
 </body>
 </html>
