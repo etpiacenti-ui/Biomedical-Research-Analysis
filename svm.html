@@ -48,30 +48,73 @@
 <h2>Overview</h2>
 
 <p>
-Support Vector Machines (SVMs) are supervised learning models used for classification tasks. 
-They work by finding the optimal separating boundary—called a hyperplane—that maximizes the margin between classes. 
-SVMs are considered linear separators because, in their simplest form, they attempt to draw a straight line (in 2D) or a flat hyperplane (in higher dimensions) that best divides the data. 
-However, many real-world datasets are not linearly separable. 
-To address this, SVMs use <em>kernels</em>, which transform the data into a higher-dimensional space where a linear separator becomes possible. 
-The kernel trick allows this transformation to happen implicitly, without ever computing the high-dimensional coordinates directly. 
-This is why the dot product is essential: kernels rely on dot products to compute similarity in the transformed feature space. 
-Common kernels include the polynomial kernel and the radial basis function (RBF) kernel. 
-For example, a polynomial kernel with parameters \( r = 1 \) and \( d = 2 \) maps a 2D point into a higher-dimensional feature space that includes squared and interaction terms. 
-Below are two images illustrating how SVMs separate data and how kernels reshape the feature space.
+    Support Vector Machines (SVMs) are supervised learning models used for classification, and the basic ideas behind them are shown in the images below. 
+    In a simple linear SVM, the model tries to draw the best possible straight line (or hyperplane) that separates two classes while leaving the largest possible margin between them. 
+    The points that lie closest to this boundary are called support vectors, and they determine exactly where the hyperplane is placed (Shown below in Fig. 1). 
+    This works well when the data can be separated with a straight line, as shown in the first image. 
+    But many real-world datasets are not linearly separable, and a straight boundary is not enough to divide the classes cleanly. 
+    The second image (Fig. 2) shows this situation, where one class is surrounded by another and a curved boundary is needed. 
+    To handle these more complex patterns, SVMs use <em>kernels</em>, which allow the model to transform the data into a higher-dimensional space where a linear separator becomes possible. 
+    This transformation happens through the kernel trick, which relies on dot products to compute similarity without ever explicitly calculating the higher-dimensional coordinates. 
+    Common kernels include the polynomial kernel and the radial basis function (RBF) kernel, both of which allow SVMs to learn flexible, nonlinear decision boundaries. 
+    For example, a polynomial kernel with parameters \( r = 1 \) and \( d = 2 \) expands a 2D point into a higher-dimensional feature space that includes squared and interaction terms, making nonlinear separation possible.
 </p>
 
 <div class="figure">
-    <img src="images/svm_linear_example.jpg" alt="Linear SVM Example">
-    <p class="caption">Figure 1. A linear SVM separating two classes with a maximum-margin hyperplane.</p>
+    <img src="images/svm_linear_margin.png" alt="Linear SVM Margin Example">
+    <p class="caption">
+        Figure 1. Linear SVM showing the decision boundary, margin, and support vectors. 
+        <a href="https://medium.com/low-code-for-advanced-data-science/support-vector-machines-svm-an-intuitive-explanation-b084d6238106" target="_blank">Source</a>
+    </p>
 </div>
 
 <div class="figure">
-    <img src="images/svm_kernel_example.jpg" alt="Kernel Trick Example">
-    <p class="caption">Figure 2. Illustration of how kernel functions transform data into higher dimensions.</p>
+    <img src="images/svm_linear_vs_nonlinear.png" alt="Linear vs Nonlinear SVM Example">
+    <p class="caption">
+        Figure 2. Comparison of linear and nonlinear SVMs, illustrating how kernels allow curved decision boundaries. 
+        <a href="https://naemazam.medium.com/support-vector-machine-svm-in-machine-learning-66d0f6688ca5" target="_blank">Source</a>
+    </p>
 </div>
 
 <hr>
 
+<h3>Example: Casting a 2D Point Using a Polynomial Kernel</h3>
+
+<p>
+    To see how kernels transform data, consider a simple example using the polynomial kernel. 
+    The polynomial kernel has the form:
+</p>
+
+<p style="text-align:center;">
+    K(x, z) = (x · z + r)<sup>d</sup>
+</p>
+
+<p>
+    For this project, we use the example where the parameters are r = 1 and d = 2. 
+    This kernel implicitly maps a 2D point into a higher‑dimensional feature space that includes squared terms and interaction terms. 
+    Suppose we start with a point x = (x₁, x₂). 
+    When the polynomial kernel expands the expression (x · z + 1)², it creates new features that represent nonlinear combinations of the original coordinates. 
+    The corresponding feature mapping for a 2D point becomes:
+</p>
+
+<p style="text-align:center;">
+    Φ(x) = (x₁², √2 x₁x₂, x₂², √2 x₁, √2 x₂, 1)
+</p>
+
+<p>
+    This means that even though the original data lives in only two dimensions, the kernel treats it as if it were in a six‑dimensional space. 
+    Importantly, the SVM never computes these six coordinates directly. 
+    Instead, the kernel trick allows the model to work with these higher‑order features simply by evaluating the dot product inside the kernel function. 
+    This is what makes SVMs powerful: they can learn nonlinear boundaries while still operating efficiently. 
+</p>
+
+<div class="figure">
+    <img src="images/polynomial_kernel_mapping.jpg" alt="Polynomial Kernel Mapping Example">
+    <p class="caption">
+        Figure X. Example of how a polynomial kernel expands a 2D point into a higher‑dimensional feature space.
+    </p>
+</div>
+    
 <h2>Data Preparation</h2>
 
 <p>
