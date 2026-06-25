@@ -212,14 +212,6 @@ and accuracy scores.
 
 <h2>Results</h2>
 
-<p>
-This section summarizes the performance of the SVM models using three different kernels: linear, polynomial, 
-and RBF. Each model was trained on the scaled training data and evaluated on the testing set. 
-Confusion matrices, accuracy scores, and visualizations were generated to compare the kernels. 
-Different cost values were tested during development, and a cost of C = 1 produced stable and interpretable results 
-across all three kernels.
-</p>
-
 <h3>Linear Kernel</h3>
 <p>
 The linear SVM achieved <strong>perfect performance</strong> on this dataset, with an accuracy of <strong>100%</strong>. 
@@ -243,7 +235,7 @@ Kappa: 1.000
 <p>
 The polynomial kernel (degree = 3) achieved an accuracy of <strong>91.99%</strong>. 
 Although still strong, this kernel introduced unnecessary curvature and complexity, 
-leading to more misclassifications than the linear model. 
+which lead to more misclassifications than the linear model. 
 This suggests that the polynomial transformation does not match the structure of the data as well.
 </p>
 
@@ -263,7 +255,7 @@ Kappa: 0.8325
 <p>
 The RBF kernel performed very well, achieving an accuracy of <strong>97.50%</strong>. 
 It captured nonlinear structure in the data and produced a flexible decision boundary. 
-However, it still did not outperform the linear kernel, reinforcing the conclusion that the classes 
+However, it still did not outperform the linear kernel, thus it can be said that the classes 
 are fundamentally linearly separable.
 </p>
 
@@ -279,11 +271,10 @@ Specificity: 0.9903
 Kappa: 0.9475
 </pre>
 
-<h3>Visualization of Feature Space</h3>
+<h3>PCA Scatterplot of Feature Space</h3>
 <p>
 A PCA scatterplot of the training data (reduced to two principal components) shows clear separation 
-between the high_cited and low_cited classes. This visual separation supports the strong performance 
-of the linear SVM.
+between the high_cited and low_cited classes.
 </p>
 
 <div class="figure">
@@ -307,14 +298,20 @@ The linear kernel clearly outperforms the polynomial and RBF kernels, achieving 
 <h2>Conclusions</h2>
 
 <p>
-The SVM analysis demonstrates how different kernel functions affect classification performance on this dataset. 
-The linear kernel achieved perfect accuracy, indicating that the relationship between the predictor variables 
-and the citation label is highly linear after scaling. The RBF kernel also performed extremely well, 
-but its added flexibility did not improve accuracy beyond the linear model. 
-The polynomial kernel performed the worst of the three, suggesting that introducing higher‑order interactions 
-does not match the underlying structure of the data.
-In sum, the <strong>linear kernel was the best-performing model</strong>. 
-This result suggests that the dataset is fundamentally linearly separable in the transformed feature space, and additional nonlinear transformations are unnecessary. 
+Across all three SVM models, the results show that the dataset is almost perfectly linearly separable once scaled. 
+The linear kernel achieved <strong>100% accuracy</strong> with zero misclassifications 
+(52,464 high_cited and 32,358 low_cited predicted correctly), along with a Kappa of 1.0, 
+indicating complete agreement between predictions and true labels. 
+In contrast, the polynomial kernel reached <strong>91.99% accuracy</strong> and produced over 6,700 total errors, 
+while the RBF kernel performed strongly at <strong>97.5% accuracy</strong> but still misclassified 2,120 articles. 
+These differences show that nonlinear transformations introduce unnecessary complexity for this dataset.
+</p>
+
+<p>
+Conclusively, the <strong>linear kernel was the best-performing model</strong>. 
+Its perfect accuracy, perfect sensitivity and specificity (both 1.000), and error‑free confusion matrix 
+demonstrate that a simple linear hyperplane fully captures the relationship between the citation‑based features 
+and the high_cited vs. low_cited labels. 
 </p>
 
 </body>
