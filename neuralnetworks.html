@@ -23,7 +23,85 @@
 
 <h1>Neural Networks</h1>
 
-<p>This section will be completed during Module 5.</p>
+<h2>Overview</h2>
+
+
+<hr>
+
+<h2>Data Preparation</h2>
+
+<p>
+Supervised learning requires labeled data. The dataset used here includes input features 
+and a binary label. The data is divided into two disjoint subsets: a Training Set used to 
+build the model, and a Testing Set used to evaluate accuracy. These sets must remain 
+separate to ensure unbiased evaluation.
+</p>
+
+<h3>Sample of Dataset</h3>
+<img src="images/nn_sample_data.png" alt="Sample of Dataset" width="450">
+<p><a href="data/sample_data.csv">Download Sample Data</a></p>
+
+<h3>Training and Testing Sets</h3>
+<img src="images/nn_train_set.png" alt="Training Set Sample" width="450">
+<img src="images/nn_test_set.png" alt="Testing Set Sample" width="450">
+
+<p>
+The Training Set and Testing Set were created using a randomized split to ensure 
+they are disjoint. The labels used for this model are binary, representing two 
+possible outcomes for classification.
+</p>
+
+<hr>
+
+<h2>Code</h2>
+
+<p>
+The neural network model was implemented in Python using TensorFlow/Keras. 
+The model includes one hidden layer with at least three units, uses activation 
+functions for both hidden and output layers, and is trained over multiple epochs. 
+After training, the model is evaluated using the Testing Set.
+</p>
+
+<p><a href="code/neural_network_code.py">View Python Code</a></p>
+
+<h3>Training Visualizations</h3>
+<p>Below are the required images showing the confusion matrix and the last five epochs of training.</p>
+
+<img src="images/nn_confusion_matrix.png" alt="Confusion Matrix" width="450">
+<img src="images/nn_last5epochs.png" alt="Last 5 Epochs of Training" width="450">
+
+<hr>
+
+<!-- ========================= -->
+<!-- (d) RESULTS SECTION       -->
+<!-- ========================= -->
+<h2>Results</h2>
+
+<p>
+The neural network produced measurable accuracy on the Testing Set. 
+The confusion matrix summarizes correct and incorrect classifications. 
+The architecture diagram below illustrates the structure of the model, 
+including the input layer, hidden layer, output layer, weight matrices, 
+and activation functions.
+</p>
+
+<h3>Model Accuracy</h3>
+<img src="images/nn_accuracy.png" alt="Accuracy Plot" width="450">
+
+<h3>Neural Network Architecture</h3>
+<img src="images/nn_architecture_handdrawn.png" alt="Hand-Drawn NN Architecture" width="450">
+
+<hr>
+
+<!-- ========================= -->
+<!-- (e) NN CONCLUSIONS        -->
+<!-- ========================= -->
+<h2>Neural Network Conclusions</h2>
+
+<p>
+This section summarizes what the neural network reveals about the topic, 
+including patterns learned from the data and predictions supported by the model.
+</p>
 
 </body>
 </html>
