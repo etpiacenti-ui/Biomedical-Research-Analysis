@@ -32,7 +32,13 @@ the result through an activation function. This structure (as visualized in Fig.
 that are not captured by basic linear methods.
 </p>
 
-<img src="images/NN_overivew.png" alt="Example Neural Network Diagram" width="450">
+<div class="figure">
+    <img src="images/nn_overview.png" alt="Example Neural Network Diagram">
+    <p class="caption">
+        Figure 1. Simplified diagram for Neural Networks. 
+        <a href="https://www.alation.com/blog/what-is-a-neural-network/" target="_blank">Source</a>
+    </p>
+</div>
 
 <p>
 A single unit computes a value of the form f(w · x + b), where w is a set of weights, x is the 
@@ -41,7 +47,13 @@ many of these units into layers, the network transforms the data step by step un
 a final prediction.
 </p>
 
-<img src="images/NN_node.png" alt="Example Neural Network Diagram" width="450">
+<div class="figure">
+    <img src="images/nn_node.png" alt="Neural Network Node">
+    <p class="caption">
+        Figure 2. Neural Network node. 
+        <a href="https://levelup.gitconnected.com/a-review-of-the-math-used-in-training-a-neural-network-9b9d5838f272" target="_blank">Source</a>
+    </p>
+</div>
 
 <p>
 Training relies on backpropagation, which is a procedure that measures how each weight contributes to 
@@ -54,16 +66,25 @@ Repeating this process over many epochs allows the network to improve its accura
 <h2>Data Preparation</h2>
 
 <p>
-Supervised learning requires labeled data. The dataset used here includes input features 
-and a binary label. The data is divided into two disjoint subsets: a Training Set used to 
-build the model, and a Testing Set used to evaluate accuracy. These sets must remain 
-separate to ensure unbiased evaluation.
+Neural Networks require data that is both structured and labeled. Because they are supervised 
+learning models, they learn by comparing their predictions to known outcomes. For this project, 
+the dataset includes a set of input features along with a binary label that indicates one of two 
+possible classes. Before any modeling can begin, the data must be cleaned, labeled, and organized 
+into the correct format for training.
+</p>
+
+<p>
+The first step is labeling. The original dataset contains only raw observations, so each row must 
+be assigned a label that reflects the category it belongs to. Once labeling is complete, the data 
+can be used for supervised methods such as Neural Networks, Naive Bayes, Decision Trees, SVMs, and 
+other classification models. The labeled dataset shown below illustrates how each observation now 
+includes both feature values and a target label.
 </p>
 
 <figure>
     <img src="images/unsup_data_sample.png" alt="Sample of Original Data" width="500">
     <figcaption>
-        Figure 4: Sample of the dataset prior to labeling.  
+        Figure 3: Sample of the dataset prior to labeling.  
         <br>
         Source: 
         <a href="https://drive.google.com/file/d/1OaCzQxVVueYh3Pv0MFJq_E_VnyY9IzLA/view?usp=drive_link" target="_blank">Download original sample</a>
@@ -73,21 +94,35 @@ separate to ensure unbiased evaluation.
 <figure>
     <img src="images/labeled_unsup_data_sample.png" alt="Sample of Labeled Data" width="500">
     <figcaption>
-        Figure 5: Sample of the dataset after labeling.  
+        Figure 4: Sample of the dataset after labeling.  
         <br>
         Source: 
         <a href="https://drive.google.com/file/d/144sn-bBnodfNZI7p2OBMuON0btEQwUdZ/view?usp=drive_link" target="_blank">Download labeled sample</a>
     </figcaption>
 </figure>
-    
+
+<p>
+Once the dataset is labeled, it must be divided into two disjoint subsets: a Training Set and a 
+Testing Set. The Training Set is used to teach the neural network by adjusting its internal weights 
+over many iterations. The Testing Set is used only after training is complete, allowing the model’s 
+accuracy to be measured on data it has never seen before. Keeping these sets separate is essential 
+because it prevents the model from memorizing the data and ensures that the evaluation reflects 
+true generalization.
+</p>
+
 <h3>Training and Testing Sets</h3>
 
-<p>Below are samples of the Training and Testing sets used for the SVM model.</p>
+<p>
+The Training Set contains 70% of the labeled data and is used during the learning process. The 
+Testing Set contains the remaining 30% and is used to evaluate performance. Both sets were created 
+using a randomized split to ensure that the distribution of labels remains consistent across each 
+subset. This helps the neural network learn balanced patterns and prevents bias toward one class.
+</p>
 
 <figure>
     <img src="images/train_set.png" alt="Training Set Sample" width="500">
     <figcaption>
-        Figure 6: Sample of the Training Set (first 20 rows).
+        Figure 5: Sample of the Training Set (first 20 rows).
     </figcaption>
 </figure>
 
@@ -103,7 +138,7 @@ separate to ensure unbiased evaluation.
 <figure>
     <img src="images/test_set.png" alt="Testing Set Sample" width="500">
     <figcaption>
-        Figure 7: Sample of the Testing Set (first 20 rows).
+        Figure 6: Sample of the Testing Set (first 20 rows).
     </figcaption>
 </figure>
 
@@ -117,9 +152,10 @@ separate to ensure unbiased evaluation.
 </ul>
 
 <p>
-The Training Set and Testing Set were created using a randomized split to ensure 
-they are disjoint. The labels used for this model are binary, representing two 
-possible outcomes for classification.
+The labels used for the neural network are binary, meaning the model predicts one of two possible 
+outcomes. This aligns with the project requirement of using a single output unit. With the data 
+properly labeled, split, and formatted, it is ready to be passed into the neural network for training 
+and evaluation.
 </p>
 
 <hr>
