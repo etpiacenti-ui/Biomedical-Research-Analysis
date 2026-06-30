@@ -25,6 +25,29 @@
 
 <h2>Overview</h2>
 
+<p>
+Neural Networks are supervised learning models built from simple connected units that process 
+numerical inputs. Each unit applies a weighted sum to its inputs, adds a bias term, and passes 
+the result through an activation function. This structure (as visualized in Fig. 1) allows the network to learn patterns 
+that are not captured by basic linear methods.
+</p>
+
+<img src="images/NN_overivew.png" alt="Example Neural Network Diagram" width="450">
+
+<p>
+A single unit computes a value of the form f(w · x + b), where w is a set of weights, x is the 
+input vector, b is a bias, and f is an activation function such as ReLU or sigmoid (Fig. 2). By arranging 
+many of these units into layers, the network transforms the data step by step until it reaches 
+a final prediction.
+</p>
+
+<img src="images/NN_node.png" alt="Example Neural Network Diagram" width="450">
+
+<p>
+Training relies on backpropagation, which is a procedure that measures how each weight contributes to 
+the model’s error. The weights are then updated in the direction that reduces this error. 
+Repeating this process over many epochs allows the network to improve its accuracy on labeled data.
+</p>
 
 <hr>
 
@@ -37,13 +60,61 @@ build the model, and a Testing Set used to evaluate accuracy. These sets must re
 separate to ensure unbiased evaluation.
 </p>
 
-<h3>Sample of Dataset</h3>
-<img src="images/nn_sample_data.png" alt="Sample of Dataset" width="450">
-<p><a href="data/sample_data.csv">Download Sample Data</a></p>
+<figure>
+    <img src="images/unsup_data_sample.png" alt="Sample of Original Data" width="500">
+    <figcaption>
+        Figure 4: Sample of the dataset prior to labeling.  
+        <br>
+        Source: 
+        <a href="https://drive.google.com/file/d/1OaCzQxVVueYh3Pv0MFJq_E_VnyY9IzLA/view?usp=drive_link" target="_blank">Download original sample</a>
+    </figcaption>
+</figure>
 
+<figure>
+    <img src="images/labeled_unsup_data_sample.png" alt="Sample of Labeled Data" width="500">
+    <figcaption>
+        Figure 5: Sample of the dataset after labeling.  
+        <br>
+        Source: 
+        <a href="https://drive.google.com/file/d/144sn-bBnodfNZI7p2OBMuON0btEQwUdZ/view?usp=drive_link" target="_blank">Download labeled sample</a>
+    </figcaption>
+</figure>
+    
 <h3>Training and Testing Sets</h3>
-<img src="images/nn_train_set.png" alt="Training Set Sample" width="450">
-<img src="images/nn_test_set.png" alt="Testing Set Sample" width="450">
+
+<p>Below are samples of the Training and Testing sets used for the SVM model.</p>
+
+<figure>
+    <img src="images/train_set.png" alt="Training Set Sample" width="500">
+    <figcaption>
+        Figure 6: Sample of the Training Set (first 20 rows).
+    </figcaption>
+</figure>
+
+<h4>Training Set Download</h4>
+<ul>
+    <li>
+        <a href="https://drive.google.com/file/d/10ocl9q_bE0wEn3m6IvCfVd81YP2In0hQ/view?usp=drive_link" target="_blank">
+            Download train_set.csv (70% Training Data)
+        </a>
+    </li>
+</ul>
+
+<figure>
+    <img src="images/test_set.png" alt="Testing Set Sample" width="500">
+    <figcaption>
+        Figure 7: Sample of the Testing Set (first 20 rows).
+    </figcaption>
+</figure>
+
+<h4>Testing Set Download</h4>
+<ul>
+    <li>
+        <a href="https://drive.google.com/file/d/1OXuYb5OT-FLC9XHnHmrqao0uqX3KUaFa/view?usp=drive_link" target="_blank">
+            Download test_set.csv (30% Testing Data)
+        </a>
+    </li>
+</ul>
 
 <p>
 The Training Set and Testing Set were created using a randomized split to ensure 
@@ -72,9 +143,6 @@ After training, the model is evaluated using the Testing Set.
 
 <hr>
 
-<!-- ========================= -->
-<!-- (d) RESULTS SECTION       -->
-<!-- ========================= -->
 <h2>Results</h2>
 
 <p>
@@ -93,9 +161,6 @@ and activation functions.
 
 <hr>
 
-<!-- ========================= -->
-<!-- (e) NN CONCLUSIONS        -->
-<!-- ========================= -->
 <h2>Neural Network Conclusions</h2>
 
 <p>
