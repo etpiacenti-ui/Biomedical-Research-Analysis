@@ -24,7 +24,58 @@
 <h1>Conclusions</h1>
 
 <p>
-This section will contain the final project conclusions and discussion.
+Biomedical research continues to expand at an extraordinary pace, creating a landscape that is both rich in information and increasingly complex to navigate. 
+Large-scale datasets reveal clear patterns in how scientific attention shifts over time, with interdisciplinary fields growing especially quickly. 
+The rise of computational methods has played a major role in shaping these trends, enabling researchers to analyze vast collections of publications that would be impossible to review manually. 
+Throughout this project, the data showed that publication activity has intensified across many areas, particularly those that blend biology with machine learning and data science. 
+These shifts highlight how scientific communities respond to new technologies, emerging health challenges, and changes in funding priorities. 
+The rapid growth of AI-related biomedical research demonstrates how quickly new tools can reshape entire fields. 
+At the same time, traditional areas such as oncology and immunology continue to produce large volumes of influential work. 
+Together, these patterns illustrate a research ecosystem that is dynamic, interconnected, and constantly evolving. 
+Understanding these trends provides valuable context for interpreting the results of the analytical methods used throughout this project.
+</p>
+
+<p>
+Exploratory data analysis revealed important structural features of the biomedical literature. 
+Metadata such as publication year, author count, reference count, and citation behavior showed clear distributions that helped frame the rest of the analysis. 
+Clustering uncovered six distinct groups of papers, each representing different thematic or structural characteristics within the dataset. 
+These clusters reflected differences in collaboration intensity, citation patterns, and topical focus, offering a high-level view of how scientific work organizes itself. 
+PCA further clarified the major sources of variation, showing that citation-related features dominate the first principal component while publication characteristics define the second. 
+This separation highlights how impact-related and structural features interact to shape the overall landscape. 
+The combination of clustering and PCA provided a foundation for understanding how papers relate to one another and how major trends emerge across the literature. 
+These unsupervised methods helped reveal structure that would be difficult to detect through manual review alone. 
+Their results set the stage for the supervised models that followed.
+</p>
+
+<p>
+Supervised learning methods provided deeper insight into which features are most predictive of citation impact. 
+Naïve Bayes demonstrated that simple probabilistic relationships between metadata features can produce strong classification performance. 
+Decision Trees revealed how specific features—such as influential citation count, reference count, and publication venue—shape the branching structure of predictions. 
+These trees also illustrated how impurity measures and pruning strategies influence model complexity and interpretability. 
+Support Vector Machines showed that the dataset becomes linearly separable once scaled, with the linear kernel achieving perfect accuracy. 
+This result indicates that the underlying structure of the data aligns well with a simple decision boundary. 
+Together, these models demonstrated that citation impact can be predicted reliably using only metadata, even without access to full-text content or domain-specific features. 
+Their combined results highlight the strength of supervised learning for understanding patterns in scientific influence.
+</p>
+
+<p>
+The neural network model provided the strongest performance of all supervised methods, achieving nearly perfect accuracy on the testing set. 
+Its architecture, consisting of eight input features, a single hidden layer with eight ReLU units, and a sigmoid output unit, was able to capture subtle relationships between publication characteristics and citation behavior. 
+The confusion matrix showed extremely low error rates, with only a small number of misclassifications across both classes. 
+Training and validation curves demonstrated stable learning and strong generalization, indicating that the model successfully avoided overfitting. 
+The hand-drawn architecture diagram helped illustrate how the model processes information through weighted connections and activation functions. 
+These results show that even a relatively simple neural network can learn meaningful patterns in large-scale metadata. 
+The model’s performance reinforces the idea that citation impact is strongly associated with structural features of scientific publications. 
+Its success also demonstrates the value of neural networks for classification tasks involving complex, high-dimensional data.
+</p>
+
+<p>
+Taken together, the analyses conducted throughout this project provide a comprehensive view of how biomedical research evolves and how its structure can be understood through data-driven methods. 
+The combination of exploratory analysis, unsupervised learning, and supervised modeling reveals consistent patterns in publication behavior, collaboration networks, and citation impact. 
+These methods help clarify how scientific ideas spread, how influential work emerges, and how research communities respond to new challenges. 
+The results also highlight the importance of metadata as a powerful source of insight, capable of supporting accurate predictions and meaningful interpretations. 
+By integrating multiple analytical approaches, the project demonstrates how data science can help make sense of the vast and rapidly growing biomedical literature. 
+This perspective supports a deeper understanding of scientific progress and provides a foundation for future work that continues to explore how knowledge develops across time and disciplines.
 </p>
 
 </body>
