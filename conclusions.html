@@ -31,51 +31,34 @@ Throughout this project, the data showed that publication activity has intensifi
 These shifts highlight how scientific communities respond to new technologies, emerging health challenges, and changes in funding priorities. 
 The rapid growth of AI-related biomedical research demonstrates how quickly new tools can reshape entire fields. 
 At the same time, traditional areas such as oncology and immunology continue to produce large volumes of influential work. 
-Together, these patterns illustrate a research ecosystem that is dynamic, interconnected, and constantly evolving. 
-Understanding these trends provides valuable context for interpreting the results of the analytical methods used throughout this project.
+Together, these patterns illustrate a research ecosystem that is dynamic, interconnected, and constantly evolving, and understanding these trends provides valuable context to the analytical methods used throughout this project.
 </p>
 
 <p>
-Exploratory data analysis revealed important structural features of the biomedical literature. 
-Metadata such as publication year, author count, reference count, and citation behavior showed clear distributions that helped frame the rest of the analysis. 
-Clustering uncovered six distinct groups of papers, each representing different thematic or structural characteristics within the dataset. 
-These clusters reflected differences in collaboration intensity, citation patterns, and topical focus, offering a high-level view of how scientific work organizes itself. 
-PCA further clarified the major sources of variation, showing that citation-related features dominate the first principal component while publication characteristics define the second. 
-This separation highlights how impact-related and structural features interact to shape the overall landscape. 
-The combination of clustering and PCA provided a foundation for understanding how papers relate to one another and how major trends emerge across the literature. 
-These unsupervised methods helped reveal structure that would be difficult to detect through manual review alone. 
-Their results set the stage for the supervised models that followed.
+To sum up the findings, exploratory data analysis (EDA) first revealed important structural features of the biomedical literature, where the metadata such as publication year, author count, reference count, and citation behavior showed clear distributions that helped frame the rest of the analysis. 
+Clustering further uncovered six distinct groups of papers, each representing different thematic or structural characteristics within the dataset. 
+These clusters reflected differences in collaboration intensity, citation patterns, and topical focus, which offered a high-level view of how scientific work organizes itself. 
+Principal Component Analysis (PCA) further clarified the major sources of variation, showing that citation-related features dominate the first principal component while publication characteristics define the second. 
+This separation highlights how impact-related and structural features interact to shape the overall landscape, and the combination of both clustering and PCA provided a framework for understanding how papers relate to one another and how major trends emerge across the literature. 
+The results from the unsupervised methods helped reveal the underlying structure of the data to then set the stage for the supervised models that followed.
 </p>
 
 <p>
 Supervised learning methods provided deeper insight into which features are most predictive of citation impact. 
-Naïve Bayes demonstrated that simple probabilistic relationships between metadata features can produce strong classification performance. 
-Decision Trees revealed how specific features—such as influential citation count, reference count, and publication venue—shape the branching structure of predictions. 
-These trees also illustrated how impurity measures and pruning strategies influence model complexity and interpretability. 
-Support Vector Machines showed that the dataset becomes linearly separable once scaled, with the linear kernel achieving perfect accuracy. 
-This result indicates that the underlying structure of the data aligns well with a simple decision boundary. 
-Together, these models demonstrated that citation impact can be predicted reliably using only metadata, even without access to full-text content or domain-specific features. 
-Their combined results highlight the strength of supervised learning for understanding patterns in scientific influence.
+In the first supervised method, Naïve Bayes demonstrated that simple probabilistic relationships between metadata features can produce strong classification performance. 
+In the second supervised method, Decision Trees revealed how specific features, such as influential citation count, reference count, and publication venue—shape the branching structure of predictions. It also illustrated how impurity measures and pruning strategies influence model complexity and interpretability. 
+Next, Support Vector Machines (SVM) showed that the dataset becomes linearly separable once scaled, with the linear kernel achieving perfect accuracy, which indicates that the underlying structure of the data aligns well with a simple decision boundary. 
+Finally, the neural network model also provided strong performance of all supervised methods, achieving nearly perfect accuracy on the testing set. 
+Its architecture consisted of eight input features, a single hidden layer with eight ReLU units, and a sigmoid output unit. It was successfully able to capture subtle relationships between publication characteristics and citation behavior. 
+The results show that even a relatively simple neural network can learn meaningful patterns in large-scale metadata, and the the model’s performance reinforces the idea that citation impact is strongly associated with structural features of scientific publications. 
+Taken together, the supervised learning models demonstrated that citation impact can be predicted reliably using only metadata, even without access to full-text content or domain-specific features. 
 </p>
 
 <p>
-The neural network model provided the strongest performance of all supervised methods, achieving nearly perfect accuracy on the testing set. 
-Its architecture, consisting of eight input features, a single hidden layer with eight ReLU units, and a sigmoid output unit, was able to capture subtle relationships between publication characteristics and citation behavior. 
-The confusion matrix showed extremely low error rates, with only a small number of misclassifications across both classes. 
-Training and validation curves demonstrated stable learning and strong generalization, indicating that the model successfully avoided overfitting. 
-The hand-drawn architecture diagram helped illustrate how the model processes information through weighted connections and activation functions. 
-These results show that even a relatively simple neural network can learn meaningful patterns in large-scale metadata. 
-The model’s performance reinforces the idea that citation impact is strongly associated with structural features of scientific publications. 
-Its success also demonstrates the value of neural networks for classification tasks involving complex, high-dimensional data.
-</p>
-
-<p>
-Taken together, the analyses conducted throughout this project provide a comprehensive view of how biomedical research evolves and how its structure can be understood through data-driven methods. 
-The combination of exploratory analysis, unsupervised learning, and supervised modeling reveals consistent patterns in publication behavior, collaboration networks, and citation impact. 
-These methods help clarify how scientific ideas spread, how influential work emerges, and how research communities respond to new challenges. 
+In summation, the analyses conducted throughout this project provide a comprehensive view of how biomedical research evolves and how its structure can be understood through data-driven methods. 
+The combination of unsupervised learning, and supervised modeling reveals consistent patterns in publication behavior, collaboration networks, and citation impact, that help clarify how scientific ideas spread, how influential work emerges, and how research communities respond to new challenges. 
 The results also highlight the importance of metadata as a powerful source of insight, capable of supporting accurate predictions and meaningful interpretations. 
-As a final step, the project returns to the core research questions mentioned within the introduction section. 
-These answers summarize the major insights gained from the analyses and help connect the results back to the broader themes of scientific growth and influence.  
+As a final note, lets return to the core research questions mentioned within the introduction, and summarize the major insights gained from the analyses to help connect the results back to the broader themes of scientific growth and influence.  
 </p>
 
 <hr>
@@ -83,7 +66,7 @@ These answers summarize the major insights gained from the analyses and help con
 <h2>Research Questions & Answers</h2>
 
 <p><strong>1. Which biomedical research topics have grown the fastest over the past decade?</strong><br>
-Interdisciplinary areas combining computation with biology—medical informatics, genomics, and AI-assisted diagnostics—have expanded most rapidly since 2015.
+Interdisciplinary areas combining computation with biology: medical informatics, genomics, and AI-assisted diagnostics—have expanded most rapidly since 2015.
 </p>
 
 <p><strong>2. What themes or keywords appear most often in high-impact biomedical papers?</strong><br>
@@ -115,7 +98,7 @@ Yes. Journal venue and reputation were among the strongest predictors in supervi
 </p>
 
 <p><strong>9. Can citation impact be predicted from early publication features?</strong><br>
-Yes. All supervised models—Naïve Bayes, Decision Trees, SVMs, and Neural Networks—successfully predicted citation impact using metadata alone, with the neural network achieving the highest accuracy.
+Yes. All supervised models, including, Naïve Bayes, Decision Trees, SVMs, and Neural Networks, successfully predicted citation impact using metadata alone.
 </p>
 
 <p><strong>10. How has biomedical research shifted in response to major global events?</strong><br>
@@ -126,11 +109,11 @@ Events such as the COVID‑19 pandemic caused dramatic surges in virology, epide
 
 <p>
 Overall, this project demonstrates how large-scale metadata can reveal meaningful patterns in scientific activity.  
-They show that research topics evolve in response to technological advances, collaboration networks, and global events.  
+It showed that research topics evolve in response to technological advances, collaboration networks, and global events.  
 They also highlight how publication characteristics relate to long-term influence and how different fields grow at different rates.  
-Connecting these answers back to the broader narrative, the project provides a complete picture of how biomedical research develops over time, and how this perspective emphasizes the value of data-driven approaches for understanding scientific progress.  
+Connecting these answers back to the broader narrative, this project provides a complete picture of how biomedical research develops over time, and how this perspective emphasizes the value of data-driven approaches for understanding scientific progress.  
 It also shows how machine learning can help interpret the complexity of modern research ecosystems.  
-Together, these insights offer a clear and structured understanding of how biomedical science continues to evolve, how computational methods can support researchers within the vast and rapidly growing scientific landscape, and provides a foundation for future work that explores how knowledge spreads across disciplines.    
+All to say, these insights offer a clear and structured understanding of how biomedical science continues to evolve, how computational methods can support researchers within the vast and rapidly growing scientific landscape, to then provide a foundation for future work that explores how knowledge spreads across disciplines.    
 </p>
 
 </body>
