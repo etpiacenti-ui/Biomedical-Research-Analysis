@@ -76,8 +76,7 @@ into the correct format for training.
 <p>
 The first step is labeling. The original dataset contains only raw observations, so each row must 
 be assigned a label that reflects the category it belongs to. Once labeling is complete, the data 
-can be used for supervised methods such as Neural Networks, Naive Bayes, Decision Trees, SVMs, and 
-other classification models. The labeled dataset shown below illustrates how each observation now 
+can be used for supervised methods such as Neural Networks. The labeled dataset shown below illustrates how each observation now 
 includes both feature values and a target label.
 </p>
 
@@ -153,9 +152,7 @@ subset. This helps the neural network learn balanced patterns and prevents bias 
 
 <p>
 The labels used for the neural network are binary, meaning the model predicts one of two possible 
-outcomes. This aligns with the project requirement of using a single output unit. With the data 
-properly labeled, split, and formatted, it is ready to be passed into the neural network for training 
-and evaluation.
+outcomes. With the data properly labeled, split, and formatted, it is ready to be passed into the neural network for training and evaluation.
 </p>
 
 <hr>
@@ -164,7 +161,7 @@ and evaluation.
 
 <p>
 The neural network was implemented in Python. Before training, all 
-categorical columns, e.g., journal names, venues, fields of study, and open-access status—were 
+categorical columns, e.g., journal names, venues, fields of study, and open-access status, were 
 converted into numeric values using a LabelEncoder. The encoder was then fit on the combined training 
 and testing data to ensure consistent mappings across both sets. After encoding, the dataset was 
 split into input features and a binary label indicating whether each publication was classified 
@@ -196,7 +193,7 @@ a single hidden layer with eight ReLU units, and a sigmoid output unit for binar
 </figure>
 
 <p>
-The confusion matrix in Figure 7 highlights the model’s strong performance. It correctly predicted 
+The confusion matrix, highlighted above in Fig. 7 shows the model’s strong performance. It correctly predicted 
 34,893 low-cited papers and 21,567 high-cited papers. Only 83 low-cited papers were incorrectly 
 labeled as high-cited, and only 5 high-cited papers were misclassified as low-cited. This reflects 
 excellent precision and recall for both classes.
@@ -208,7 +205,7 @@ excellent precision and recall for both classes.
 </figure>
 
 <p>
-Figure 8 shows the accuracy and loss trends over the last five epochs. Training accuracy remained 
+Fig. 8 above shows (1) the accuracy and (2) loss trends over the last five epochs. Training accuracy remained 
 high and stable, while validation accuracy rose sharply toward the end. Validation loss briefly 
 increased before dropping to nearly zero, indicating that the model continued refining its 
 decision boundaries and ultimately converged to a stable solution.
