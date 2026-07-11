@@ -23,11 +23,11 @@
 <h1>Data Preparation & Exploratory Data Analysis (EDA)</h1>
 
 <p>
-This section documents the systematic process by which the two biomedical literature datasets used in this project were collected, integrated, cleaned, standardized, and explored. The workflow spans multiple stages of the data science pipeline, beginning with data acquisition from an external REST API (Europe PMC) and a secondary structured dataset sourced from Kaggle. Emphasis is placed on ensuring consistency across heterogeneous data sources, particularly in harmonizing variable definitions, resolving missing values, normalizing textual fields, and addressing outliers that may affect downstream analysis.
+This section documents the process by which the biomedical literature datasets used in this project were collected, integrated, cleaned, standardized, and explored. The workflow begins with data acquisition from an external API (Europe PMC), secondary structured dataset sourced from Kaggle, as well as a third source API from the Semantic Scholar Open Research Corpus. Emphasis is placed on ensuring consistency across heterogeneous data sources, particularly in harmonizing variable definitions, resolving missing values, normalizing textual fields, and addressing outliers that may affect downstream analysis.
 </p>
 
 <p>
-The primary objective of this stage is to construct a robust, high-quality, and analytically coherent biomedical research dataset that is suitable for advanced machine learning applications. This includes unsupervised learning methods such as clustering and association rule mining, as well as supervised learning techniques including Naive Bayes classification, Decision Tree modeling, Support Vector Machines, regression analysis, and neural network architectures. The aim of this section is to establish a clean and well-structured dataset to ensure that subsequent modeling steps are built on a reliable foundation, thereby improving the validity, interpretability, and reproducibility of all analytical results.
+The primary objective of this stage is to construct a robust, high-quality, and analytically coherent biomedical research dataset that is suitable for machine learning applications. This includes unsupervised learning methods such as clustering, as well as supervised learning techniques including Naive Bayes classification, Decision Tree modeling, Support Vector Machines (SVM), and neural network architectures. The aim of this section is to establish a clean and well-structured dataset to ensure that subsequent modeling steps are built on a reliable foundation, thereby improving the validity, interpretability, and overall reproducibility of all analytical results.
 </p>
 
 <hr>
@@ -85,8 +85,8 @@ The Kaggle dataset complements the API dataset by providing thematic and semanti
 
 <p>
 A single shard (~1.5 GB compressed) of the Semantic Scholar <code>papers</code> dataset was downloaded and converted from JSONL to CSV. 
-This dataset complements the Europe PMC and Kaggle datasets by providing a broader and more diverse sample of scientific literature, 
-including fields outside biomedicine. Only metadata fields relevant to this project were retained.
+This dataset complements the other datasets by providing a broader and more diverse sample of scientific literature, 
+including fields outside biomedicine. Note that only metadata fields relevant to this project were retained.
 </p>
 
 <hr>
@@ -99,12 +99,12 @@ Below are small images showing what the raw data looked like before cleaning.
 
 <div>
     <img src="images/API_RAW.png" width="600">
-    <p><i>Figure A1: Raw API dataset (excerpt).</i></p>
+    <p><i>Figure 1: Raw API dataset (excerpt).</i></p>
 </div>
 
 <div>
     <img src="images/KAGGLE_RAW.png" width="600">
-    <p><i>Figure A2: Raw Kaggle dataset (excerpt).</i></p>
+    <p><i>Figure 2: Raw Kaggle dataset (excerpt).</i></p>
 </div>
 
 <hr>
@@ -112,7 +112,7 @@ Below are small images showing what the raw data looked like before cleaning.
 <h2>3. Data Cleaning & Standardization</h2>
 
 <p>
-Cleaning and EDA were performed iteratively. Each visualization informed the next round of preprocessing.
+Cleaning and EDA were performed iteratively, where each visualization informed the next round of preprocessing.
 </p>
 
 <h3>3.1 Cleaning Steps for Europe PMC API Data</h3>
@@ -149,12 +149,12 @@ Cleaning and EDA were performed iteratively. Each visualization informed the nex
 
 <div>
     <img src="images/API_CLEAN.png" width="600">
-    <p><i>Figure A3: Cleaned API dataset (excerpt).</i></p>
+    <p><i>Figure 3: Cleaned API dataset (excerpt).</i></p>
 </div>
 
 <div>
     <img src="images/KAGGLE_CLEAN.png" width="600">
-    <p><i>Figure A4: Cleaned Kaggle dataset (excerpt).</i></p>
+    <p><i>Figure 4: Cleaned Kaggle dataset (excerpt).</i></p>
 </div>
 
 <hr>
@@ -165,43 +165,43 @@ Cleaning and EDA were performed iteratively. Each visualization informed the nex
 The following visualizations were generated to understand the structure, distribution, and thematic content of the datasets.
 </p>
 
-<h3>Figure 1 — Top 20 Journals (API)</h3>
+<h3>Figure 5: Top 20 Journals (API)</h3>
 <p>Shows which journals published the most biomedical articles in 2026.</p>
 <img src="images/vis1_top_journals.png" width="600">
 
-<h3>Figure 2 — Author Count Distribution (API)</h3>
+<h3>Figure 6: Author Count Distribution (API)</h3>
 <p>Shows typical team sizes in biomedical research, capped at 50 authors for clarity.</p>
 <img src="images/vis2_author_count.png" width="600">
 
-<h3>Figure 3 — Indexing Lag (API)</h3>
+<h3>Figure 7: Indexing Lag (API)</h3>
 <p>Shows how quickly papers are indexed in Europe PMC, with most indexed within a few days.</p>
 <img src="images/vis3_index_lag.png" width="600">
 
-<h3>Figure 4 — Title Keyword Frequency (API)</h3>
+<h3>Figure 8: Title Keyword Frequency (API)</h3>
 <p>Shows the most common non-stopword terms appearing in article titles.</p>
 <img src="images/vis4_title_keywords.png" width="600">
 
-<h3>Figure 5 — Keyword Frequency (Kaggle)</h3>
+<h3>Figure 9: Keyword Frequency (Kaggle)</h3>
 <p>Shows the most frequent author-provided keywords in the Kaggle dataset.</p>
 <img src="images/vis5_keyword_frequency.png" width="600">
 
-<h3>Figure 6 — Major Topic Frequency (Kaggle)</h3>
+<h3>Figure 10: Major Topic Frequency (Kaggle)</h3>
 <p>Shows the most common high-level research topics assigned to Kaggle papers.</p>
 <img src="images/vis6_major_topics.png" width="600">
 
-<h3>Figure 7 — Abstract Length Distribution (Kaggle)</h3>
+<h3>Figure 11: Abstract Length Distribution (Kaggle)</h3>
 <p>Shows how long abstracts tend to be, with most under ~300 words.</p>
 <img src="images/vis7_abstract_length.png" width="600">
 
-<h3>Figure 8 — Country Distribution (Kaggle)</h3>
+<h3>Figure 12: Country Distribution (Kaggle)</h3>
 <p>Shows which countries appear most frequently as the origin of Kaggle research.</p>
 <img src="images/vis8_countries.png" width="600">
 
-<h3>Figure 9 — Shared Journals (API vs Kaggle)</h3>
+<h3>Figure 13: Shared Journals (API vs Kaggle)</h3>
 <p>Shows the top shared journals between datasets, normalized by proportion.</p>
 <img src="images/vis9_journal_overlap_top10.png" width="600">
 
-<h3>Figure 10 — Author Count Comparison (API vs Kaggle)</h3>
+<h3>Figure 14: Author Count Comparison (API vs Kaggle)</h3>
 <p>Shows that API papers have larger author teams, while Kaggle papers have smaller ML/NLP teams.</p>
 <img src="images/vis10_author_comparison.png" width="600">
 
@@ -210,7 +210,7 @@ The following visualizations were generated to understand the structure, distrib
 <h2>5. Summary</h2>
 
 <p>
-The Data Preparation process resulted in cleaned, standardized, and analytically consistent biomedical datasets. These datasets provide a multidimensional representation of biomedical research activity spanning publication trends, topical distributions, and collaborative structures for the 2026–2027 period. The resulting processed dataset serves as a validated and reproducible foundation for all subsequent machine learning workflows in this project, including both unsupervised learning (clustering and association rule mining) and supervised learning methods (classification, regression, and neural network modeling). This ensures that downstream analyses are conducted on a reliable, consistent, and methodologically sound data framework.
+Processing the data resulted in a cleaned, standardized, and analytically consistent set of biomedical datasets. These datasets represent biomedical research activity spanning publication trends, topical distributions, and collaborative structures for the 2026–2027 period. The resulting processed dataset serves as a validated and reproducible foundation for all subsequent machine learning workflows in this project, including both unsupervised learning (e.g., clustering) and supervised learning methods (e.g., classification, and neural network modeling). This ensures that downstream analyses are conducted on a reliable, consistent, and methodologically sound data framework.
 </p>
     
 <hr>
